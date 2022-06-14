@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import {Dashboard} from "../../pages/Dashboard";
+import {Dashboard} from "../../pages/Dasboard/Dashboard";
 import {Category} from "../../pages/Category";
 import {Clients} from "../../pages/Clients";
 import {Orders} from "../../pages/Orders";

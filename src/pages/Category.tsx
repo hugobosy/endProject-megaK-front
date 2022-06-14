@@ -2,6 +2,8 @@ import React from "react";
 
 export const Category = () => {
     return (
-        <h1>Category</h1>
+        <div className="page">
+            <h1>Kategorie</h1>
+        </div>
     )
 }

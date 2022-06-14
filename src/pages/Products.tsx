@@ -2,6 +2,8 @@ import React from "react";
 
 export const Products = () => {
     return (
-        <h1>Products</h1>
+        <div className="page">
+            <h1>Produkty</h1>
+        </div>
     )
 }

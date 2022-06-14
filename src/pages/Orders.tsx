@@ -2,6 +2,8 @@ import React from "react";
 
 export const Orders = () => {
     return (
-        <h1>Orders</h1>
+        <div className="page">
+            <h1>Zamówienia</h1>
+        </div>
     )
 }

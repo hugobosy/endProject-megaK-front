@@ -2,6 +2,8 @@ import React from "react";
 
 export const Tasks = () => {
     return (
-        <h1>Tasks</h1>
+        <div className="page">
+            <h1>Zadania</h1>
+        </div>
     )
 }

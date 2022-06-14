@@ -2,6 +2,8 @@ import React from "react";
 
 export const Clients = () => {
     return (
-        <h1>Clients</h1>
+        <div className="page">
+            <h1>Klienci</h1>
+        </div>
     )
 }
