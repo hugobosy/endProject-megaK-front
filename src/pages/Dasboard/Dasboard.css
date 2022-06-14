@@ -1,0 +1,138 @@
+h1 {
+    padding-bottom: 50px;
+}
+
+.Dashboard__base-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+
+}
+
+.Dashboard__base-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    column-gap: 30px;
+}
+
+.Dashboard__base-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.Dashboard__base-item:nth-child(1) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(29, 92, 253) 0%, rgb(126, 143, 232) 85%);
+}
+
+.Dashboard__base-item:nth-child(2) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(44, 129, 15) 0%, rgb(139, 246, 127) 85%);
+}
+
+.Dashboard__base-item:nth-child(3) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 85%);
+}
+
+.Dashboard__base-item:nth-child(4) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(110, 17, 164) 0%, rgb(221, 126, 232) 85%);
+}
+
+.Dashboard__base-content p:nth-child(1){
+    font-size: 20px;
+    font-weight: bold;
+}
+.Dashboard__base-content p:nth-child(2){
+    padding: 15px 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+.Dashboard__base-content p:nth-child(3){;
+    font-size: 18px;
+}
+
+.Dashboard__latest-sell {
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    border: 2px solid rgba(0,0,0,.05);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.Dashboard__latest-sell h2 {
+    font-weight: 500;
+    padding-bottom: 50px;
+}
+
+.Dashboard__latest-item {
+    display: grid;
+    grid-template-columns: .4fr .8fr 1fr .4fr .4fr;
+    grid-gap: 30px;
+    place-self: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.Dashboard__latest-item p {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.Dashboard__latest-item img {
+    max-width: 100%;
+}
+
+.Dashboard__latest-item span {
+    align-self: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.Dashboard__purchase-history {
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    border: 2px solid rgba(0,0,0,.05);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.Dashboard__purchase-history h2 {
+    font-weight: 500;
+    padding-bottom: 50px;
+}
+
+.Dashboard__purchase-item {
+    display: grid;
+    grid-template-columns: .4fr .8fr 1fr .4fr .4fr;
+    grid-gap: 30px;
+    place-self: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.Dashboard__purchase-item:nth-of-type(1) p {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.Dashboard__purchase-item span {
+    align-self: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.Dashboard__purchase-item div:nth-of-type(2) span {
+    display: block;
+}
