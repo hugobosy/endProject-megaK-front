@@ -54,7 +54,7 @@ main {
 }
 
 .page {
-    padding: 30px;
+    padding: 30px 30px 30px 60px;
 }
 
 .page h1 {
