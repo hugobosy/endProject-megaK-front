@@ -1,0 +1,60 @@
+h1 {
+    padding-bottom: 50px;
+}
+
+.Dashboard__base-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+
+}
+
+.Dashboard__base-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    column-gap: 30px;
+}
+
+.Dashboard__base-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.Dashboard__base-item:nth-child(1) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(29, 92, 253) 0%, rgb(126, 143, 232) 85%);
+}
+
+.Dashboard__base-item:nth-child(2) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(44, 129, 15) 0%, rgb(139, 246, 127) 85%);
+}
+
+.Dashboard__base-item:nth-child(3) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 85%);
+}
+
+.Dashboard__base-item:nth-child(4) .Dashboard__base-icon {
+    background: linear-gradient(90deg, rgb(110, 17, 164) 0%, rgb(221, 126, 232) 85%);
+}
+
+.Dashboard__base-content p:nth-child(1){
+    font-size: 20px;
+    font-weight: bold;
+}
+.Dashboard__base-content p:nth-child(2){
+    padding: 15px 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+.Dashboard__base-content p:nth-child(3){;
+    font-size: 18px;
+}
