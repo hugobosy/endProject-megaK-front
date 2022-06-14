@@ -1,10 +1,10 @@
 import React from "react";
-import { Menu } from "../Menu/Menu";
+import {Menu} from "../Menu/Menu";
 import {Routing} from "../Routing/Routing";
 import {Bell, Envelope} from "@styled-icons/boxicons-regular";
 import man from '../../assets/img/man.png';
-
 import './Home.css';
+import {Logo} from "../Logo/Logo";
 
 export const Home = () => {
 
@@ -25,7 +25,7 @@ export const Home = () => {
                 </div>
             </header>
             <aside>
-                <div>Logo</div>
+                <Logo/>
                 <ul>
                     <Menu/>
                 </ul>
