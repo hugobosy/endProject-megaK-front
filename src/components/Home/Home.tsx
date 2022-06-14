@@ -4,6 +4,8 @@ import {Routing} from "../Routing/Routing";
 import {Bell, Envelope} from "@styled-icons/boxicons-regular";
 import man from '../../assets/img/man.png';
 
+import './Home.css';
+
 export const Home = () => {
 
     return (

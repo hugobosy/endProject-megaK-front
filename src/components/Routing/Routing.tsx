@@ -5,6 +5,7 @@ import {Category} from "../../pages/Category";
 import {Clients} from "../../pages/Clients";
 import {Orders} from "../../pages/Orders";
 import {Products} from "../../pages/Products";
+import {Tasks} from "../../pages/Tasks";
 
 export const Routing = () => (
     <Routes>
@@ -14,5 +15,8 @@ export const Routing = () => (
         <Route path='/clients' element={<Clients/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route path='/products' element={<Products/>}/>
+        <Route path='/tasks' element={<Tasks/>}/>
     </Routes>
 )
+
+//todo Must create redirect from '/'
