@@ -7,6 +7,7 @@
     cursor: pointer;
     position: relative;
     padding-left: 20px;
+    text-decoration: none;
 }
 .Menu::before {
     content: '';
@@ -37,11 +38,21 @@
     display: block;
     width: 100%;
     padding: 30px 0 30px 10px;
-    font-family: Roboto, sans-serif;
     letter-spacing: 1.6px;
     font-weight: 600;
     color: #555;
-    text-decoration: none;
     font-size: 20px;
     transition: .2s;
+}
+
+.Menu.active {
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 56%);
+}
+
+.Menu.active .Menu__link{
+    color: white;
+}
+
+.Menu.active .Menu__icon {
+    color: white;
 }
