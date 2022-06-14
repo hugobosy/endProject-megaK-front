@@ -1,0 +1,12 @@
+.Avatar{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.Avatar img {
+    max-width: 100%;
+}
