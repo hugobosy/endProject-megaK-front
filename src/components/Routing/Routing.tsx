@@ -9,6 +9,7 @@ import {Products} from "../../pages/Products";
 export const Routing = () => (
     <Routes>
         <Route path='/' element={<Dashboard/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/category' element={<Category/>}/>
         <Route path='/clients' element={<Clients/>}/>
         <Route path='/orders' element={<Orders/>}/>
