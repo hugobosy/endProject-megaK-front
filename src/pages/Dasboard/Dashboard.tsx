@@ -74,7 +74,7 @@ export const Dashboard = () => {
             </div>
 
             <div className="Dashboard__purchase-history">
-                <h2>Historia zakupów</h2>
+                <h2>Historia sprzedazy</h2>
                 <div className="Dashboard__purchase-item">
                     <p>Id zakupu</p>
                     <p>Produkty</p>
