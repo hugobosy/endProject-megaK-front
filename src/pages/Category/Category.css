@@ -1,0 +1,33 @@
+.Category {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 30px;
+}
+
+.Category__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.Category__item img {
+    max-width: 100px;
+}
+
+.Category__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.Category__content h2 {
+    font-size: 40px;
+    justify-self: center;
+}
+
+.Category__content span {
+    align-self: flex-end;
+}
