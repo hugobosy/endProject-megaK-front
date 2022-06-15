@@ -1,0 +1,22 @@
+.Clients__header,
+.Clients__item{
+    display: grid;
+    grid-template-columns: .2fr .7fr 1fr 1fr .5fr .4fr .5fr 1fr .3fr;
+    background-color: #fff;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.Clients__item {
+    font-weight: normal;
+    align-items: center;
+}
+
+.Clients__item:nth-child(2n) {
+    background-color: #f8f8f8
+}
+
+.Clients__item p:last-of-type {
+    display: flex;
+    justify-content: space-between;
+}
