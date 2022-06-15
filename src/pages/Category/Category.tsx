@@ -5,21 +5,23 @@ import './Category.css';
 export const Category = () => {
     return (
         <div className="page">
-            <h1>Kategorie</h1>
+            <div className="Category__header">
+                <h1>Kategorie</h1>
 
-            <form>
+                <form>
 
-                <label>Dodaj nową kategorię</label>
-                <p>
-                    <input type="text"/>
-                </p>
-                <label>Dodaj adres odnośnika do obrazka reprezentującego kategorię</label>
-                <p>
-                    <input type="text"/>
-                </p>
+                    <label>Dodaj nową kategorię</label>
+                    <p>
+                        <input type="text"/>
+                    </p>
+                    <label>Dodaj adres odnośnika do obrazka reprezentującego kategorię</label>
+                    <p>
+                        <input type="text"/>
+                    </p>
 
-                <button type="submit">Dodaj</button>
-            </form>
+                    <button type="submit">Dodaj</button>
+                </form>
+            </div>
 
             <div className="Category">
                 <div className="Category__item">

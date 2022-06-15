@@ -11,6 +11,8 @@
     padding: 20px;
     width: 100%;
     background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.05);
 }
 
 .Category__item img {
@@ -30,4 +32,55 @@
 
 .Category__content span {
     align-self: flex-end;
+}
+
+.Category__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.Category__header form {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.05);
+    border-radius: 8px;
+}
+
+.Category__header input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+    transition: .4s;
+    outline-color: transparent;
+}
+
+.Category__header input:focus {
+    outline-color: chocolate;
+}
+
+.Category__header p {
+    padding-bottom: 10px;
+}
+
+.Category__header label {
+    letter-spacing: 1px;
+    font-size: 12px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.Category__header button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 85%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
 }
