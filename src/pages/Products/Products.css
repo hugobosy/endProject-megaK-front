@@ -71,3 +71,23 @@
 .Products__btn button:nth-of-type(2) {
     background-color: #d7374f;
 }
+
+.Products__sort {
+    padding: 20px 10px;
+}
+
+.Products__sort form {
+    display: flex;
+    column-gap: 20px;
+}
+
+.Products__sort select {
+    width: 200px;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.05);
+}
+
+.Products__sort option {
+    border: none;
+}

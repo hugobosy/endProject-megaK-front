@@ -12,6 +12,20 @@ export const Products = () => {
                 </form>
             </div>
 
+            <div className="Products__sort">
+                <form>
+                    <h3>Sortuj po</h3>
+                    <select>
+                        <option value="-">-</option>
+                        <option value="najnowszych">najnowszych</option>
+                        <option value="najstarszych">najstarszych</option>
+                        <option value="alfabetycznie">alfabetycznie</option>
+                        <option value="najdrozszych">najdrozszych</option>
+                        <option value="najtanszych">najtanszych</option>
+                    </select>
+                </form>
+            </div>
+
             <div className="Products__list">
 
                 <div className="Products__item">
