@@ -4,7 +4,7 @@ import {Dashboard} from "../../pages/Dasboard/Dashboard";
 import {Category} from "../../pages/Category";
 import {Clients} from "../../pages/Clients";
 import {Orders} from "../../pages/Orders";
-import {Products} from "../../pages/Products";
+import {Products} from "../../pages/Products/Products";
 import {Tasks} from "../../pages/Tasks";
 
 export const Routing = () => (
