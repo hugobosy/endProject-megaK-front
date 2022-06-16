@@ -1,20 +1,11 @@
 import React, {ReactElement, useEffect, useState} from "react";
 import {Trash} from "@styled-icons/boxicons-solid";
 import './Category.css';
+import {CategoryList} from "../../components/Category/CategoryList";
 
 export const Category = (): ReactElement => {
 
-    const [data, setData] = useState([]);
 
-    useEffect(() => {
-        getData();
-    }, [])
-
-    async function getData(): Promise<void> {
-        await fetch('http://localhost:3001/category')
-            .then(res => res.json())
-            .then(data => setData(data))
-    }
 
     return (
         <div className="page">
@@ -37,21 +28,8 @@ export const Category = (): ReactElement => {
             {/*    todo dodawanie kategorii bo bazy*/}
             </div>
 
-            <div className="Category">
-                {data.map(({id, image, name}) => {
-                    return (
-                        <div className="Category__item" key={id}>
-                            <img
-                                src={image}
-                                alt={name}/>
-                            <div className="Category__content">
-                                <h2>{name}</h2>
-                                <span><Trash size="30" color="red"/></span>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+            <CategoryList/>
+
         </div>
     )
 }
