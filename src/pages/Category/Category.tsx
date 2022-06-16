@@ -1,35 +1,13 @@
-import React, {ReactElement, useEffect, useState} from "react";
-import {Trash} from "@styled-icons/boxicons-solid";
+import React from "react";
 import './Category.css';
 import {CategoryList} from "../../components/Category/CategoryList";
+import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
 
-export const Category = (): ReactElement => {
-
-
-
+export const Category = () => {
     return (
         <div className="page">
-            <div className="Category__header">
-                <h1>Kategorie</h1>
-
-                <form>
-
-                    <label>Dodaj nową kategorię</label>
-                    <p>
-                        <input type="text"/>
-                    </p>
-                    <label>Dodaj adres odnośnika do obrazka reprezentującego kategorię</label>
-                    <p>
-                        <input type="text"/>
-                    </p>
-
-                    <button type="submit">Dodaj</button>
-                </form>
-            {/*    todo dodawanie kategorii bo bazy*/}
-            </div>
-
+            <CategoryAddForm/>
             <CategoryList/>
-
         </div>
     )
 }
