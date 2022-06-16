@@ -1,8 +1,21 @@
-import React from "react";
+import React, {ReactElement, useEffect, useState} from "react";
 import {Trash} from "@styled-icons/boxicons-solid";
 import './Category.css';
 
-export const Category = () => {
+export const Category = (): ReactElement => {
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    async function getData(): Promise<void> {
+        await fetch('http://localhost:3001/category')
+            .then(res => res.json())
+            .then(data => setData(data))
+    }
+
     return (
         <div className="page">
             <div className="Category__header">
@@ -21,82 +34,23 @@ export const Category = () => {
 
                     <button type="submit">Dodaj</button>
                 </form>
+            {/*    todo dodawanie kategorii bo bazy*/}
             </div>
 
             <div className="Category">
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                {/*todo pobranie kategori z bazy*/}
+                {data.map(({id, image, name}) => {
+                    return (
+                        <div className="Category__item" key={id}>
+                            <img
+                                src={image}
+                                alt={name}/>
+                            <div className="Category__content">
+                                <h2>{name}</h2>
+                                <span><Trash size="30" color="red"/></span>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
