@@ -1,58 +1,31 @@
-import React, {SyntheticEvent, useState} from "react";
-import {AdCategory, Data} from "types";
+import React, {Dispatch, SyntheticEvent} from "react";
+import {Data} from "types";
 
-export const CategoryAddForm = () => {
+interface Props {
+    submitForm: (e: SyntheticEvent) => void,
+    data: Data,
+    setData: Dispatch<Data>,
+    click: ()=>void
+}
 
-    const [data, setData] = useState<Data>({
-        name: '',
-        image: '',
-    })
-
-    const [info, setInfo] = useState<string>('')
-
-
-    const handleSubmit = async (e:SyntheticEvent) => {
-        e.preventDefault();
-
-        try {
-            const res = await fetch('http://localhost:3001/category/add', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const info: AdCategory = await res.json();
-
-            console.log(info)
-
-            setInfo(`Kategoria ${info.name} została pomyślnie dodana do bazy`)
-
-        } catch (e) {
-            setInfo(`Nieznany błąd`)
-        } finally {
-
-        }
-    }
+export const CategoryAddForm = (props: Props) => {
 
     return (
         <div className="Category__header">
             <h1>Kategorie</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={props.submitForm}>
 
                 <label>Dodaj nową kategorię</label>
                 <p>
-                    <input type="text" value={data.name} onChange={e => setData({...data, name: e.target.value})}/>
+                    <input type="text" value={props.data.name} onChange={e => props.setData({...props.data, name: e.target.value})}/>
                 </p>
                 <label>Dodaj adres odnośnika do obrazka reprezentującego kategorię</label>
                 <p>
-                    <input type="text" value={data.image} onChange={e => setData({...data, image: e.target.value})}/>
+                    <input type="text" value={props.data.image} onChange={e => props.setData({...props.data, image: e.target.value})}/>
                 </p>
 
-                <button type="submit">Dodaj</button>
+                <button type="submit" onClick={props.click}>Dodaj</button>
             </form>
-            {/*    todo dodawanie kategorii bo bazy*/}
         </div>
     )
 }

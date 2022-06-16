@@ -15,6 +15,7 @@ export const CategoryList = () => {
             .then(data => setData(data))
     }
 
+
     return (
         <div className="Category">
             {data.map(({id, image, name}) => (
@@ -30,5 +31,6 @@ export const CategoryList = () => {
                 )
             )}
         </div>
+
     )
 }
