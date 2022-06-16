@@ -2,7 +2,7 @@ import React from "react";
 import {Route, Routes} from "react-router-dom";
 import {Dashboard} from "../../pages/Dasboard/Dashboard";
 import {Category} from "../../pages/Category/Category";
-import {Clients} from "../../pages/Clients";
+import {Clients} from "../../pages/Clients/Clients";
 import {Orders} from "../../pages/Orders/Orders";
 import {Products} from "../../pages/Products/Products";
 import {Tasks} from "../../pages/Tasks";

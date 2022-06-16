@@ -1,103 +1,56 @@
-import React from "react";
-import {Trash} from "@styled-icons/boxicons-solid";
+import React, {SyntheticEvent, useState} from "react";
 import './Category.css';
+import {CategoryList} from "../../components/Category/CategoryList";
+import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
+import {Data} from "types";
+import {Spinner} from "../../components/common/Spinner/Spinner";
 
 export const Category = () => {
+
+    const [data, setData] = useState<Data>({
+        name: '',
+        image: '',
+    })
+
+    const [info, setInfo] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
+
+    const handleSubmit = async (e:SyntheticEvent) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+        try {
+            const res = await fetch('http://localhost:3001/category/add', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const info = await res.json();
+
+            setInfo(`Kategoria ${info.name} została pomyślnie dodana do bazy`)
+
+        } catch (e) {
+            setInfo(`Nieznany błąd`)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    if(loading) {
+        return <Spinner/>
+    }
+    const handleClick = () => {
+
+    }
+
     return (
         <div className="page">
-            <div className="Category__header">
-                <h1>Kategorie</h1>
-
-                <form>
-
-                    <label>Dodaj nową kategorię</label>
-                    <p>
-                        <input type="text"/>
-                    </p>
-                    <label>Dodaj adres odnośnika do obrazka reprezentującego kategorię</label>
-                    <p>
-                        <input type="text"/>
-                    </p>
-
-                    <button type="submit">Dodaj</button>
-                </form>
-            </div>
-
-            <div className="Category">
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                <div className="Category__item">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlXHYedLls8U5YX93oIYr804vdEGdLX0AS-Q&usqp=CAU"
-                        alt="plecak"/>
-                    <div className="Category__content">
-                        <h2>Plecaki</h2>
-                        <span><Trash size="30" color="red"/></span>
-                    </div>
-                </div>
-                {/*todo pobranie kategori z bazy*/}
-            </div>
+            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData} click={handleClick}/>
+            <CategoryList/>
         </div>
     )
 }
