@@ -1,21 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {Trash} from "@styled-icons/boxicons-solid";
+import {Data} from "types";
 
-export const CategoryList = () => {
+interface Props {
+    data: Data[]
+}
 
-    const [data, setData] = useState([]);
+export const CategoryList = (props:Props) => {
 
-    useEffect(() => {
-        getData();
-    }, [])
-
-    async function getData(): Promise<void> {
-        await fetch('http://localhost:3001/category')
-            .then(res => res.json())
-            .then(data => setData(data))
-    }
-
-
+    // const [data, setData] = useState([]);
+    //
+    // useEffect(() => {
+    //     getData();
+    // }, [])
+    //
+    // async function getData(): Promise<void> {
+    //     await fetch('http://localhost:3001/category')
+    //         .then(res => res.json())
+    //         .then(data => setData(data))
+    // }
+    console.log(props.data)
+    const {data} = props;
     return (
         <div className="Category">
             {data.map(({id, image, name}) => (

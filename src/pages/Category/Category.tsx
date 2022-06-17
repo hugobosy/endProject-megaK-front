@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useState} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 import './Category.css';
 import {CategoryList} from "../../components/Category/CategoryList";
 import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
@@ -7,13 +7,26 @@ import {Notification} from "../../components/common/Notification/Notification";
 
 export const Category = () => {
 
-    const [data, setData] = useState<Data>({
+    const [data, setData] = useState([]);
+
+    const [formData, setFormData] = useState<Data>({
+        id: '',
         name: '',
         image: '',
     });
 
     const [mess, setMess] = useState<string>('');
     const [success, setSuccess] = useState<boolean | null>(null)
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    async function getData(): Promise<void> {
+        await fetch('http://localhost:3001/category')
+            .then(res => res.json())
+            .then(data => setData(data))
+    }
 
     const close = () => {
         setTimeout(() => {
@@ -25,7 +38,7 @@ export const Category = () => {
         try {
             await fetch('http://localhost:3001/category/add', {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -39,13 +52,13 @@ export const Category = () => {
 
         e.preventDefault();
 
-        if (data.name.length >= 50 || data.name.length === 0) {
+        if (formData.name.length >= 50 || formData.name.length === 0) {
             setMess('Pole nazwy nie moze być puste lub nie moze przekroczyć 50 znaków')
             setSuccess(false);
             close();
             return
         }
-        if (data.image.length >= 200 || data.image.length === 0) {
+        if (formData.image.length >= 200 || formData.image.length === 0) {
             setMess('Link do obrazka nie moze być pusty lub dluzszy niz 200 znaków!')
             setSuccess(false)
             close()
@@ -54,8 +67,11 @@ export const Category = () => {
             addData();
             setMess('Dodano kategorię do bazy')
             setSuccess(true)
+            const newData = [...data, formData];
+            // @ts-ignore
+            setData(newData);
             close()
-            setData({
+            setFormData({
                 name: '',
                 image: ''
             })
@@ -64,8 +80,8 @@ export const Category = () => {
 
     return (
         <div className="page">
-            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData}/>
-            <CategoryList/>
+            <CategoryAddForm submitForm={handleSubmit} data={formData} setData={setFormData}/>
+            <CategoryList data={data}/>
             <Notification msg={mess} succ={success}/>
         </div>
     )
