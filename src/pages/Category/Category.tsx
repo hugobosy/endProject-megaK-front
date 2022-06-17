@@ -62,14 +62,9 @@ export const Category = () => {
         }
     }
 
-    const handleClick = () => {
-
-    }
-
-
     return (
         <div className="page">
-            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData} click={handleClick}/>
+            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData}/>
             <CategoryList/>
             <Notification msg={mess} succ={success}/>
         </div>

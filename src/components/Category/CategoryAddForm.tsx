@@ -5,7 +5,6 @@ interface Props {
     submitForm: (e: SyntheticEvent) => void,
     data: Data,
     setData: Dispatch<Data>,
-    click: () => void;
 }
 
 export const CategoryAddForm = (props: Props) => {
@@ -25,7 +24,7 @@ export const CategoryAddForm = (props: Props) => {
                         <input type="text" value={props.data.image} onChange={e => props.setData({...props.data, image: e.target.value})}/>
                     </p>
 
-                    <button type="submit" onClick={props.click}>Dodaj</button>
+                    <button type="submit">Dodaj</button>
                 </form>
 
             </div>
