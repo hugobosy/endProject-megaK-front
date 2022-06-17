@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect, useState} from "react";
+import React, {SyntheticEvent, useState} from "react";
 import './Category.css';
 import {CategoryList} from "../../components/Category/CategoryList";
 import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
@@ -15,26 +15,13 @@ export const Category = () => {
     const [mess, setMess] = useState<string>('');
     const [success, setSuccess] = useState<boolean | null>(null)
 
-    useEffect(() => {
+    const close = () => {
+        setTimeout(() => {
+            setSuccess(null)
+        }, 3000)
+    }
 
-    },[])
-
-    const handleSubmit = async (e: SyntheticEvent):Promise<void> => {
-
-        e.preventDefault();
-
-        if(data.name.length >= 50 || data.name.length === 0) {
-            setMess('Pole nazwy nie moze być puste lub nie moze przekroczyć 50 znaków')
-            setSuccess(false);
-            return
-        }
-
-        if(data.image.length >= 200 || data.image.length === 0) {
-            setMess('Link do obrazka nie moze być pusty lub dluzszy niz 200 znaków!')
-            setSuccess(false)
-            return
-        }
-
+    const addData = async () => {
         try {
             await fetch('http://localhost:3001/category/add', {
                 method: 'POST',
@@ -48,14 +35,41 @@ export const Category = () => {
         }
     }
 
-    const handleClick = () => {
-        setMess('Dodano kategorię do bazy')
-        setSuccess(true)
+    const handleSubmit = (e: SyntheticEvent) => {
+
+        e.preventDefault();
+
+        if (data.name.length >= 50 || data.name.length === 0) {
+            setMess('Pole nazwy nie moze być puste lub nie moze przekroczyć 50 znaków')
+            setSuccess(false);
+            close();
+            return
+        }
+        if (data.image.length >= 200 || data.image.length === 0) {
+            setMess('Link do obrazka nie moze być pusty lub dluzszy niz 200 znaków!')
+            setSuccess(false)
+            close()
+            return
+        } else {
+            addData();
+            setMess('Dodano kategorię do bazy')
+            setSuccess(true)
+            close()
+            setData({
+                name: '',
+                image: ''
+            })
+        }
     }
+
+    const handleClick = () => {
+
+    }
+
 
     return (
         <div className="page">
-            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData} message={mess} success={success} click={handleClick}/>
+            <CategoryAddForm submitForm={handleSubmit} data={data} setData={setData} click={handleClick}/>
             <CategoryList/>
             <Notification msg={mess} succ={success}/>
         </div>

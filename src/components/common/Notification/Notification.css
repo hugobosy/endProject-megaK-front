@@ -11,6 +11,9 @@
     padding: 20px;
     border-top-left-radius: 24px;
     border-bottom-left-radius: 8px;
+    color: #fff;
+    transition: .4s;
+    z-index: 999;
 }
 
 .notification h4 {

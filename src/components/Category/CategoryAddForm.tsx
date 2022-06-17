@@ -5,8 +5,6 @@ interface Props {
     submitForm: (e: SyntheticEvent) => void,
     data: Data,
     setData: Dispatch<Data>,
-    message: string,
-    success: boolean | null,
     click: () => void;
 }
 
@@ -28,7 +26,6 @@ export const CategoryAddForm = (props: Props) => {
                     </p>
 
                     <button type="submit" onClick={props.click}>Dodaj</button>
-                    <span>{props.message}</span>
                 </form>
 
             </div>
