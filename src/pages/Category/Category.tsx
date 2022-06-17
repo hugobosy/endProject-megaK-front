@@ -28,7 +28,7 @@ export const Category = () => {
             .then(data => setData(data))
     }
 
-    const close = () => {
+    const closeNotification = () => {
         setTimeout(() => {
             setSuccess(null)
         }, 3000)
@@ -55,13 +55,13 @@ export const Category = () => {
         if (formData.name.length >= 50 || formData.name.length === 0) {
             setMess('Pole nazwy nie moze być puste lub nie moze przekroczyć 50 znaków')
             setSuccess(false);
-            close();
+            closeNotification();
             return
         }
         if (formData.image.length >= 200 || formData.image.length === 0) {
             setMess('Link do obrazka nie moze być pusty lub dluzszy niz 200 znaków!')
             setSuccess(false)
-            close()
+            closeNotification()
             return
         } else {
             addData();
@@ -70,7 +70,7 @@ export const Category = () => {
             const newData = [...data, formData];
             // @ts-ignore
             setData(newData);
-            close()
+            closeNotification()
             setFormData({
                 name: '',
                 image: ''
@@ -78,10 +78,39 @@ export const Category = () => {
         }
     }
 
+    const deleteData = async(item: string) => {
+        try {
+            await fetch(`http://localhost:3001/category/delete/${item}`, {
+                method: 'POST',
+                body: JSON.stringify({item}),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        } catch (e) {
+            console.log('Błąd usuwania', e)
+        }
+    }
+
+    const deleteClick = (e: SyntheticEvent) => {
+        // @ts-ignore
+        const delItem = e.currentTarget.parentNode.parentNode.parentNode.id;
+        console.log(delItem)
+        deleteData(delItem)
+        setMess('Usunięto kategorię do bazy')
+        setSuccess(false)
+        // @ts-ignore
+        const newData = [...data].filter(item=> item.id !== delItem);
+        console.log(newData)
+        // @ts-ignore
+        setData(newData);
+        closeNotification()
+    }
+
     return (
         <div className="page">
             <CategoryAddForm submitForm={handleSubmit} data={formData} setData={setFormData}/>
-            <CategoryList data={data}/>
+            <CategoryList data={data} delete={deleteClick}/>
             <Notification msg={mess} succ={success}/>
         </div>
     )
