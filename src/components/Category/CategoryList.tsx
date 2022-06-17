@@ -12,7 +12,7 @@ export const CategoryList = (props:Props) => {
     return (
         <div className="Category">
             {data.map(({id, image, name}) => (
-                    <div className="Category__item" key={id} id={id}>
+                    <div className="Category__item" key={id} id={id} data-name={name}>
                         <img
                             src={image}
                             alt={name}/>
@@ -24,6 +24,6 @@ export const CategoryList = (props:Props) => {
                 )
             )}
         </div>
-
+    //todo dodanie sortowania kategorii
     )
 }

@@ -95,9 +95,12 @@ export const Category = () => {
     const deleteClick = (e: SyntheticEvent) => {
         // @ts-ignore
         const delItem = e.currentTarget.parentNode.parentNode.parentNode.id;
+        // @ts-ignore
+        const nameDelItem = e.currentTarget.parentNode.parentNode.parentNode.dataset.name;
         console.log(delItem)
         deleteData(delItem)
-        setMess('Usunięto kategorię do bazy')
+        // @ts-ignore
+        setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
         setSuccess(false)
         // @ts-ignore
         const newData = [...data].filter(item=> item.id !== delItem);
