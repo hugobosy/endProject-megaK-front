@@ -1,36 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {MouseEventHandler} from 'react';
 import {Trash} from "@styled-icons/boxicons-solid";
+import {Data} from "types";
 
-export const CategoryList = () => {
+interface Props {
+    data: Data[],
+    delete: MouseEventHandler
+}
 
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        getData();
-    }, [])
-
-    async function getData(): Promise<void> {
-        await fetch('http://localhost:3001/category')
-            .then(res => res.json())
-            .then(data => setData(data))
-    }
-
-
+export const CategoryList = (props:Props) => {
+    const {data} = props;
     return (
         <div className="Category">
             {data.map(({id, image, name}) => (
-                    <div className="Category__item" key={id}>
+                    <div className="Category__item" key={id} id={id} data-name={name}>
                         <img
                             src={image}
                             alt={name}/>
                         <div className="Category__content">
                             <h2>{name}</h2>
-                            <span><Trash size="30" color="red"/></span>
+                            <span><Trash size="30" color="red" cursor="pointer" onClick={props.delete}/></span>
                         </div>
                     </div>
                 )
             )}
         </div>
-
+    //todo dodanie sortowania kategorii
     )
 }
