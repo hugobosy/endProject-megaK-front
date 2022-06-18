@@ -6,11 +6,13 @@
 .Clients__header,
 .Clients__item{
     display: grid;
-    grid-template-columns: .2fr .7fr 1fr 1fr .5fr .4fr .5fr 1fr .3fr;
+    grid-template-columns: .2fr .6fr 1fr 1fr .5fr .5fr .8fr 1fr .3fr;
     padding: 20px;
     font-weight: bold;
 }
-
+.Clients__header p:nth-child(1) {
+    grid-column: 2/3;
+}
 .Clients__item {
     font-weight: normal;
     align-items: center;
