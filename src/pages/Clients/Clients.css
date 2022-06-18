@@ -14,7 +14,7 @@
     grid-column: 2/3;
 }
 .Clients__item {
-    font-weight: normal;
+    font-weight: 500;
     align-items: center;
 }
 
@@ -25,4 +25,9 @@
 .Clients__item p:last-of-type {
     display: flex;
     justify-content: space-between;
+}
+
+.Clients__item.banned {
+    background-color: red;
+    color: white;
 }

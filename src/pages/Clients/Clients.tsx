@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 import './Clients.css';
 import {ClientsList} from "../../components/Clients/ClientsList";
 
 export const Clients = () => {
 
     const [clients, setClients] = useState([]);
+
+
 
     useEffect(()=> {
         getClients();
@@ -16,7 +18,25 @@ export const Clients = () => {
             .then(data => setClients(data))
     }
 
-    console.log(clients)
+    const deleteClient = async (item: string) => {
+        try {
+            await fetch(`http://localhost:3001/clients/delete/${item}`, {
+                method: 'POST',
+                body: JSON.stringify({item}),
+                headers: {
+                    'Content-type': 'application/json',
+                },
+            })
+        } catch (e) {
+            console.log('Error', e)
+        }
+    }
+
+    const handleDelete = (e:SyntheticEvent) => {
+        // @ts-ignore
+        const delItem = e.currentTarget.parentNode.parentNode.id
+        deleteClient(delItem);
+    }
 
     return (
 
@@ -33,8 +53,7 @@ export const Clients = () => {
                     <p>E-mail</p>
                     <p>Akcja</p>
                 </div>
-                <ClientsList listClient={clients}/>
-            {/*    todo map z bazy*/}
+                <ClientsList listClient={clients} click={handleDelete}/>
             </div>
         </div>
     )

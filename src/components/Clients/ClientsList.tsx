@@ -1,10 +1,11 @@
-import React from "react";
+import React, {SyntheticEvent} from "react";
 import {User} from "@styled-icons/boxicons-regular";
 import {Trash, Hand} from "@styled-icons/boxicons-solid";
 import {ClientType} from "types";
 
 interface Props {
     listClient: ClientType[],
+    click: (e:SyntheticEvent)=>void
 }
 
 export const ClientsList = (props: Props) => {
@@ -13,7 +14,7 @@ export const ClientsList = (props: Props) => {
         <>
             {
                 props.listClient.map(client => (
-                    <div className="Clients__item" key={client.id}>
+                    <div className={client.ban ? "Clients__item banned" : "Clients__item"} key={client.id} id={client.id}>
 
                         <p><User size="25"/></p>
                         <p>{client.name}</p>
@@ -22,9 +23,11 @@ export const ClientsList = (props: Props) => {
                         <p>{client.phone}</p>
                         <p>{client.gender}</p>
                         <p>{client.birth.slice(0, 10)}</p>
-                        <p>{client.mail}</p>
-                        <p><Trash size="25" color="red" style={{cursor: 'pointer'}}/><Hand size="25" color="red"
-                                                                                           style={{cursor: 'pointer'}}/>
+                        <p>{client.email}</p>
+                        <p><Trash size="25" color="red"
+                                  style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.click}/><Hand
+                            size="25" color="red"
+                            style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}}/>
                         </p>
 
                     </div>
