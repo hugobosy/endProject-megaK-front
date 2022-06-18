@@ -46,6 +46,7 @@ export const Category = () => {
         } catch (e) {
             console.log('Error', e)
         }
+    //    todo przypisywanie uuid aby automatycznie było w id kategorii
     }
 
     const handleSubmit = (e: SyntheticEvent) => {
