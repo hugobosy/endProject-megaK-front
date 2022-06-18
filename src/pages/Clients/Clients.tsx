@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './Clients.css';
-import {User} from "@styled-icons/boxicons-regular";
-import {Hand, Trash} from "@styled-icons/boxicons-solid";
+import {ClientsList} from "../../components/Clients/ClientsList";
 
 export const Clients = () => {
 
@@ -34,17 +33,7 @@ export const Clients = () => {
                     <p>E-mail</p>
                     <p>Akcja</p>
                 </div>
-                {/*<div className="Clients__item">*/}
-                {/*    <p><User size="25"/></p>*/}
-                {/*    <p>Hubert</p>*/}
-                {/*    <p>Kliszcz</p>*/}
-                {/*    <p>Armii Krajowej 6/3 <br/> 59-300 Lubin</p>*/}
-                {/*    <p>608172153</p>*/}
-                {/*    <p>Mezczyzna</p>*/}
-                {/*    <p>24.10.1987</p>*/}
-                {/*    <p>hkliszcz@gmail.com</p>*/}
-                {/*    <p><Trash size="25" color="red" style={{cursor: 'pointer'}}/><Hand size="25" color="red" style={{cursor: 'pointer'}}/></p>*/}
-                {/*</div>*/}
+                <ClientsList listClient={clients}/>
             {/*    todo map z bazy*/}
             </div>
         </div>
