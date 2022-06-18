@@ -28,6 +28,6 @@
 }
 
 .Clients__item.banned {
-    background-color: red;
+    background-color: #f89393;
     color: white;
 }

@@ -5,7 +5,8 @@ import {ClientType} from "types";
 
 interface Props {
     listClient: ClientType[],
-    click: (e:SyntheticEvent)=>void
+    clickDel: (e:SyntheticEvent)=>void
+    clickBan: (e:SyntheticEvent)=>void
 }
 
 export const ClientsList = (props: Props) => {
@@ -25,9 +26,9 @@ export const ClientsList = (props: Props) => {
                         <p>{client.birth.slice(0, 10)}</p>
                         <p>{client.email}</p>
                         <p><Trash size="25" color="red"
-                                  style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.click}/><Hand
+                                  style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.clickDel}/><Hand
                             size="25" color="red"
-                            style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}}/>
+                            style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.clickBan}/>
                         </p>
 
                     </div>
