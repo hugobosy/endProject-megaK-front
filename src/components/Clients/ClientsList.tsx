@@ -15,7 +15,7 @@ export const ClientsList = (props: Props) => {
         <>
             {
                 props.listClient.map(client => (
-                    <div className={client.ban ? "Clients__item banned" : "Clients__item"} key={client.id} id={client.id}>
+                    <div className={client.ban ? "Clients__item banned" : "Clients__item"} key={client.id} id={client.id} data-name={`${client.name} ${client.surname}`}>
 
                         <p><User size="25"/></p>
                         <p>{client.name}</p>

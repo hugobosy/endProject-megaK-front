@@ -4,7 +4,24 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .05);
 }
 
-.Clients__header,
+.Clients__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Clients__header button {
+    font-size: 18px;
+    padding: 10px 30px;
+    border: none;
+    background-color: #2bd511;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.1);
+    cursor: pointer;
+}
+
+.Clients__header-list,
 .Clients__item {
     display: grid;
     grid-template-columns: .2fr .6fr 1fr 1fr .5fr .5fr .8fr 1fr .3fr;
