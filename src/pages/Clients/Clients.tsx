@@ -10,7 +10,7 @@ export const Clients = () => {
     const [clients, setClients] = useState([]);
     const [success, setSuccess] = useState<boolean | null>(null);
     const [mess, setMess] = useState<string>('');
-    const [addClient, setAddClient] = useState<boolean>(true)
+    const [addClient, setAddClient] = useState<boolean>(false)
 
 
     useEffect(() => {
@@ -101,7 +101,7 @@ export const Clients = () => {
                 <ClientsList listClient={clients} clickDel={handleDelete} clickBan={handleBan}/>
             </div>
             <Notification msg={mess} succ={success}/>
-            {addClient ? <AddClient/> : null}
+            {addClient ? <AddClient adClient={addClient} setClient={setAddClient}/> : null}
         </div>
     )
 }
