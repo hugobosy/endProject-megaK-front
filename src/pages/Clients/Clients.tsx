@@ -8,6 +8,7 @@ export const Clients = () => {
     const [clients, setClients] = useState([]);
 
 
+
     useEffect(() => {
         getClients();
     }, []);
@@ -17,7 +18,7 @@ export const Clients = () => {
             .then(res => res.json())
             .then(data => setClients(data))
     }
-
+    //todo usun then bo jest await
     const deleteClient = async (item: string) => {
         try {
             await fetch(`http://localhost:3001/clients/delete/${item}`, {
@@ -61,7 +62,7 @@ export const Clients = () => {
         console.log(banItem)
         banClient(banItem)
         // @ts-ignore
-        clients.map(client => client.id === banItem)
+        e.currentTarget.parentNode.parentNode.classList.add('banned')
     }
 
     return (
