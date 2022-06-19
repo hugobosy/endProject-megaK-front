@@ -2,7 +2,7 @@ import React from "react";
 
 export const ClientListHeader = () => (
     <>
-        <div className="Clients__header">
+        <div className="Clients__header-list">
             <p>Imię</p>
             <p>Nazwisko</p>
             <p>Adres</p>

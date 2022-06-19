@@ -15,7 +15,7 @@ export const ClientsList = (props: Props) => {
         <>
             {
                 props.listClient.map(client => (
-                    <div className={client.ban ? "Clients__item banned" : "Clients__item"} key={client.id} id={client.id}>
+                    <div className={client.ban ? "Clients__item banned" : "Clients__item"} key={client.id} id={client.id} data-name={`${client.name} ${client.surname}`}>
 
                         <p><User size="25"/></p>
                         <p>{client.name}</p>
@@ -26,9 +26,9 @@ export const ClientsList = (props: Props) => {
                         <p>{client.birth.slice(0, 10)}</p>
                         <p>{client.email}</p>
                         <p><Trash size="25" color="red"
-                                  style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.clickDel}/><Hand
+                                  style={{cursor: 'pointer'}} className="bx-trash-alt" onClick={props.clickDel}/><Hand
                             size="25" color="red"
-                            style={client.ban ? {cursor: 'pointer', color: 'white'} : {cursor: "pointer"}} onClick={props.clickBan}/>
+                            style={{cursor: 'pointer'}} className="bxs-hand" onClick={props.clickBan}/>
                         </p>
 
                     </div>
