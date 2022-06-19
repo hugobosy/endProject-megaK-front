@@ -1,4 +1,5 @@
 .Home {
+    position: relative;
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-rows: 100px 1fr;
@@ -56,6 +57,7 @@ main {
 
 .page {
     padding: 30px 30px 30px 60px;
+    min-height: calc(100vh - 100px);
 }
 
 .page h1 {
