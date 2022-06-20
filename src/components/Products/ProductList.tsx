@@ -19,6 +19,7 @@ export const ProductList = (props: Props) => {
                         <h2>{product.firm} {product.model}</h2>
                         <p>{product.name}</p>
                         <p>{product.description.slice(0, 100)}...Czytaj więcej</p>
+                        <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
                             <button>Edytuj</button>
@@ -27,6 +28,7 @@ export const ProductList = (props: Props) => {
                     </div>
                 </div>
             ))}
+        {/*    todo dodaj opcję liczba sprzedanch sztuk na podstawie informacji z bazy*/}
         </div>
     )
 }

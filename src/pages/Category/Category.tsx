@@ -46,7 +46,7 @@ export const Category = () => {
         } catch (e) {
             console.log('Error', e)
         }
-    //    todo przypisywanie uuid aby automatycznie było w id kategorii
+    //    todo przypisywanie uuid aby automatycznie było w id kategorii lub moze przeladowanie strony ?
     }
 
     const handleSubmit = (e: SyntheticEvent) => {

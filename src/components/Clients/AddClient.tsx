@@ -125,7 +125,6 @@ export const AddClient = (props: Props) => {
         }, 3400)
     }
 
-    //todo dodac walidacje formularza
     return (
         <div className="Clients__add">
             <form className="Clients__add-form" onSubmit={handleSubmitAddClient}>
