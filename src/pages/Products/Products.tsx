@@ -16,6 +16,7 @@ export const Products = () => {
         getProducts()
     }, [])
 
+    console.log(product)
     return (
         <div className="page">
 
