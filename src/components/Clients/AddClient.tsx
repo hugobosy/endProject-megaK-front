@@ -23,7 +23,53 @@ export const AddClient = (props: Props) => {
         email: '',
     })
 
+    const [error, setError] = useState(false)
+    const [msgError, setMsgError] = useState('')
+
+
     const addClient = async () => {
+        if(!addForm.name || addForm.name.length < 3 || addForm.name.length > 36 || !/^[A-Za-z]/.test(addForm.name)) {
+            setError(true)
+            setMsgError('Imię powinno mieć minimum 3 znaki oraz maks 36 znaków bez liczb')
+            return
+        }
+        if(!addForm.surname || addForm.surname.length < 2 || addForm.surname.length > 96 || !/^[A-Za-z]/.test(addForm.surname)) {
+            setError(true)
+            setMsgError('Nazwisko powinno mieć minimum 2 znaki oraz maks 96 znaków bez liczb')
+            return
+        }
+        if(!addForm.address || addForm.address.length < 5 || addForm.address.length > 150) {
+            setError(true)
+            setMsgError('Adres powinno mieć minimum 5 znaków oraz maks 150 znaków')
+            return
+        }
+        if(!/^[0-9]{2}-[0-9]{3}$/.test(addForm.code)) {
+            setError(true)
+            setMsgError('Nieprawidłowy format kodu pocztowego')
+            return
+        }
+        if(!addForm.city || addForm.city.length < 3 || addForm.city.length > 70 || !/^[A-Za-z]/.test(addForm.city)) {
+            setError(true)
+            setMsgError('Nazwa miejscowości powinna składać się z min 3 znaków oraz maks 70 znaków i bez liczb')
+            return
+        }
+        if(!addForm.phone || String(addForm.phone).length !== 9 || !/^[0-9]/.test(String(addForm.phone))) {
+            setError(true)
+            setMsgError('Numer tel (pol) składa się z 9 cyfr !')
+            return
+        }
+        if(addForm.gender === '-') {
+            setError(true)
+            setMsgError('Musisz podac jedną z płci')
+            return
+        }
+        if(!addForm.email || !/\S+@\S+\.\S+/.test(addForm.email)) {
+            setError(true)
+            setMsgError('Nieprawidłowy e-mail')
+            return
+        }
+
+
         await fetch('http://localhost:3001/clients/add', {
             method: 'POST',
             body: JSON.stringify(addForm),
@@ -45,8 +91,7 @@ export const AddClient = (props: Props) => {
 
 
     }
-
-    console.log(addForm)
+    //todo dodac walidacje formularza
     return (
         <div className="Clients__add">
             <form className="Clients__add-form" onSubmit={handleSubmitAddClient}>
