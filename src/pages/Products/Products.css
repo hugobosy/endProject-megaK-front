@@ -7,6 +7,10 @@
     justify-content: space-between;
 }
 
+.Products__header input {
+    background-color: #fff;
+}
+
 .Products__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -15,14 +19,14 @@
 
 .Products__item {
     max-width: 100%;
-    height: auto;
     background-color: #fff;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.05);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .05);
     border-radius: 8px;
 }
 
-.Products__item img {
-    max-width: 100%;
+.Products__picture img {
+    width: 100%;
+    height: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -31,8 +35,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 250px;
     padding: 20px;
+}
+
+.Products__picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
 }
 
 .Products__desc h4 {
@@ -40,16 +50,25 @@
     font-size: 24px;
 }
 
-.Products__desc p:nth-child(2) {
-    padding-bottom: 20px;
+.Products__desc p:nth-child(3) {
+    padding: 20px 0;
 }
 
-.Products__desc p:nth-child(3) {
+.Products__desc p:nth-child(4),
+.Products__desc p:nth-child(5) {
     font-size: 24px;
     font-weight: bold;
     text-align: right;
 }
 
+.Products__desc p:nth-child(4) {
+    font-size: 18px;
+    padding-bottom: 20px;
+}
+
+.Products__desc p span {
+    font-weight: normal;
+}
 .Products__btn {
     display: flex;
     justify-content: flex-end;
@@ -68,6 +87,7 @@
 .Products__btn button:nth-of-type(1) {
     background-color: #e8af62;
 }
+
 .Products__btn button:nth-of-type(2) {
     background-color: #d7374f;
 }
@@ -85,7 +105,7 @@
     width: 200px;
     font-size: 16px;
     border: none;
-    box-shadow: 0 0 5px 2px rgba(0,0,0,.05);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .05);
 }
 
 .Products__sort option {
