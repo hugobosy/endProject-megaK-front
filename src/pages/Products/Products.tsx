@@ -1,8 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Products.css';
 import {ProductList} from "../../components/Products/ProductList";
 
 export const Products = () => {
+
+    const [product, setProduct] = useState([]);
+
+    const getProducts = async () => {
+        const res = await fetch('http://localhost:3001/products');
+        const data = await res.json();
+        setProduct(await data)
+    }
+
+    useEffect(()=>{
+        getProducts()
+    }, [])
+
     return (
         <div className="page">
 
@@ -27,7 +40,7 @@ export const Products = () => {
                 </form>
             </div>
 
-            <ProductList/>
+            <ProductList products={product}/>
 
         </div>
     )
