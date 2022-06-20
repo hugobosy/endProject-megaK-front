@@ -10,8 +10,10 @@ export const ProductList = (props: Props) => {
         <div className="Products__list">
             {props.products.map(product => (
                 <div className="Products__item" key={product.id}>
-                    <img src={product.picture}
-                         alt="But"/>
+                    <div className="Products__picture">
+                        <img src={product.picture}
+                             alt="But"/>
+                    </div>
                     <div className="Products__desc">
                         <h4>{product.name}</h4>
                         <p>{product.description.slice(0, 100)}...Czytaj więcej</p>
