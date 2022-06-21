@@ -5,12 +5,14 @@ import {ProductSort} from "../../components/Products/ProductSort";
 import {SearchProduct} from "../../components/Products/SearchProduct";
 import {Product} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
+import {AddProduct} from "../../components/Products/AddProduct";
 
 export const Products = () => {
 
     const [product, setProduct] = useState<Product[]>([]);
     const [mess, setMess] = useState<string>('');
-    const [success, setSuccess] = useState<boolean | null>(null)
+    const [success, setSuccess] = useState<boolean | null>(null);
+    const [addActive, setAddActive] = useState(false)
 
     const getProducts = async () => {
         const res = await fetch('http://localhost:3001/products');
@@ -18,7 +20,7 @@ export const Products = () => {
         setProduct(await data)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getProducts()
     }, [])
 
@@ -28,7 +30,11 @@ export const Products = () => {
         }, 3000)
     }
 
-    const deleteProduct = async(id:string) => {
+    const handleClickButtonAddProduct = () => {
+        setAddActive(true)
+    }
+
+    const deleteProduct = async (id: string) => {
         try {
             await fetch(`http://localhost:3001/products/delete/${id}`, {
                 method: 'POST',
@@ -52,7 +58,7 @@ export const Products = () => {
         setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
         setSuccess(false)
         // @ts-ignore
-        const newData = [...product].filter(item=> item.id !== delItem);
+        const newData = [...product].filter(item => item.id !== delItem);
         // @ts-ignore
         setProduct(newData);
         closeNotification()
@@ -64,6 +70,7 @@ export const Products = () => {
 
             <div className="Products__header">
                 <h1>Produkty</h1>
+                <button onClick={handleClickButtonAddProduct}>Dodaj produkt</button>
                 <SearchProduct/>
             </div>
 
@@ -71,6 +78,7 @@ export const Products = () => {
 
             <ProductList products={product} delete={handleDelete}/>
             <Notification msg={mess} succ={success}/>
+            {addActive ? <AddProduct close={setAddActive}/> : null}
 
         </div>
     )
