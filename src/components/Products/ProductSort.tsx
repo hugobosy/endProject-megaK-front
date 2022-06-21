@@ -9,8 +9,8 @@ export const ProductSort = () => {
                     <option value="-">-</option>
                     <option value="najnowszych">wg najnowszych</option>
                     <option value="najstarszych">wg najstarszych</option>
-                    <option value="najdrozszych">od najdroższych</option>
-                    <option value="najtanszych">od najtańszych</option>
+                    <option value="najdroższych">od najdroższych</option>
+                    <option value="najtańszych">od najtańszych</option>
                     <option value="alfabetycznie">alfabetycznie</option>
                     <option value="alfabetycznie">wg kategorii</option>
                 </select>

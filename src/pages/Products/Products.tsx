@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import './Products.css';
 import {ProductList} from "../../components/Products/ProductList";
 import {ProductSort} from "../../components/Products/ProductSort";
+import {SearchProduct} from "../../components/Products/SearchProduct";
 
 export const Products = () => {
 
@@ -23,9 +24,7 @@ export const Products = () => {
 
             <div className="Products__header">
                 <h1>Produkty</h1>
-                <form>
-                    <input type="search" className="SearchForm SearchProduct" placeholder="Znajdź produkt..."/>
-                </form>
+                <SearchProduct/>
             </div>
 
             <ProductSort/>
