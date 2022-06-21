@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {AdCategory, Product} from "types";
+import React from "react";
+import {Product} from "types";
 
 interface Props {
     products: Product[]
@@ -18,7 +18,7 @@ export const ProductList = (props: Props) => {
                     <div className="Products__desc">
                         <h2>{product.firm} {product.model}</h2>
                         <p>{product.name}</p>
-                        <p>{product.description.slice(0, 100)}...Czytaj więcej</p>
+                        <p>{product.description.slice(0, 90)}...Czytaj więcej</p>
                         <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
