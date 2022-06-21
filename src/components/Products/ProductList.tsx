@@ -1,8 +1,9 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import {Product} from "types";
 
 interface Props {
     products: Product[]
+    delete: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
@@ -23,7 +24,7 @@ export const ProductList = (props: Props) => {
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
                             <button>Edytuj</button>
-                            <button>Usuń</button>
+                            <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
                         </div>
                     </div>
                 </div>
