@@ -119,3 +119,5 @@ export const Category = () => {
         </div>
     )
 }
+
+// todo zrób przeładowanie strony po dodaniu kategorii
