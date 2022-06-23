@@ -105,3 +105,5 @@ export const Clients = () => {
         </div>
     )
 }
+
+// todo dodaj edycję klienta

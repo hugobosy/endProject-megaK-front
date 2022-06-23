@@ -4,6 +4,7 @@ import {Product} from "types";
 interface Props {
     products: Product[]
     delete: MouseEventHandler
+    edit: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
@@ -23,7 +24,7 @@ export const ProductList = (props: Props) => {
                         <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
-                            <button id={product.id}>Edytuj</button>
+                            <button onClick={props.edit} id={product.id}>Edytuj</button>
                             <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
                         </div>
                     </div>

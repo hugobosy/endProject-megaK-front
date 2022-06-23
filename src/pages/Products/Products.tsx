@@ -6,13 +6,16 @@ import {SearchProduct} from "../../components/Products/SearchProduct";
 import {Product} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddProduct} from "../../components/Products/AddProduct";
+import {EditProduct} from "../../components/Products/EditProduct";
 
 export const Products = () => {
 
     const [product, setProduct] = useState<Product[]>([]);
     const [mess, setMess] = useState<string>('');
     const [success, setSuccess] = useState<boolean | null>(null);
-    const [addActive, setAddActive] = useState(false)
+    const [addActive, setAddActive] = useState<boolean>(false);
+    const [editActive, setEditActive] = useState<boolean>(false);
+    const [editItem, setEditItem] = useState<string>('')
 
     const getProducts = async () => {
         const res = await fetch('http://localhost:3001/products');
@@ -64,7 +67,12 @@ export const Products = () => {
         closeNotification()
     }
     // todo przy błedach usuwania itp postaraj się wyświetlać belkę z informacją
-    console.log(product)
+
+    const handleEdit = (e:SyntheticEvent) => {
+        setEditActive(true)
+        setEditItem(e.currentTarget.id)
+    }
+
     return (
         <div className="page">
 
@@ -76,9 +84,10 @@ export const Products = () => {
 
             <ProductSort/>
 
-            <ProductList products={product} delete={handleDelete}/>
+            <ProductList products={product} delete={handleDelete} edit={handleEdit}/>
             <Notification msg={mess} succ={success}/>
             {addActive ? <AddProduct close={setAddActive}/> : null}
+            {editActive ? <EditProduct id={editItem} close={setEditActive}/> : null}
 
         </div>
     )
