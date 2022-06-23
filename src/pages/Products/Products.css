@@ -64,6 +64,7 @@
 
 .Products__desc p:nth-child(3) {
     padding: 20px 0;
+    height: 100px;
 }
 
 .Products__desc p:nth-child(4),

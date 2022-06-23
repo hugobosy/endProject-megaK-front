@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
-import {AdCategory} from "types";
+import {AdCategory, Product} from "types";
+import {Notification} from "../common/Notification/Notification";
 
 interface Props {
     close: Dispatch<SetStateAction<boolean>>
@@ -7,18 +8,28 @@ interface Props {
 
 export const AddProduct = (props: Props) => {
 
-    const [data, setData] = useState({
+    const [data, setData] = useState<Product>({
         firm: '',
         model: '',
         category: '-',
         size: '-',
         color: '',
+        price: 0,
         quantity: 0,
         description: '',
         picture: '',
     })
 
     const [category, setCategory] = useState<AdCategory[]>([]);
+    const [accept, setAccept] = useState<boolean>(false)
+    const [succ, setSucc] = useState<boolean | null>(null)
+    const [msg, setMsg] = useState<string>('')
+
+    const closeNotification = () => {
+        setTimeout(() => {
+            setSucc(null)
+        }, 3000)
+    }
 
     const getCategory = async () => {
         const res = await fetch('http://localhost:3001/category');
@@ -42,17 +53,30 @@ export const AddProduct = (props: Props) => {
 
     const handleAddSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
+
         addProduct();
+        setSucc(true);
+        setMsg(`Dodano produkt ${data.firm} ${data.model} do bazy`)
+        closeNotification()
+        setAccept(true)
         setData({
             firm: '',
             model: '',
             category: '-',
             size: '-',
             color: '',
+            price: 0,
             quantity: 0,
             description: '',
-            picture: '',
+            picture: ''
         })
+    }
+
+    if (accept) {
+        setTimeout(() => {
+            props.close(false)
+            window.location.reload()
+        }, 3400)
     }
 
     return (
@@ -60,12 +84,14 @@ export const AddProduct = (props: Props) => {
             <form className="Products__add-form" onSubmit={handleAddSubmit}>
                 <div>
                     <label>Nazwa firmy: </label>
-                    <p><input type="text" value={data.firm} onChange={e => setData({...data, firm: e.target.value})}/></p>
+                    <p><input type="text" value={data.firm} onChange={e => setData({...data, firm: e.target.value})}/>
+                    </p>
                 </div>
 
                 <div>
                     <label>Model produktu: </label>
-                    <p><input type="text" value={data.model} onChange={e => setData({...data, model: e.target.value})}/></p>
+                    <p><input type="text" value={data.model} onChange={e => setData({...data, model: e.target.value})}/>
+                    </p>
                 </div>
 
                 <div>
@@ -86,7 +112,7 @@ export const AddProduct = (props: Props) => {
                         {data.category === '-' ? <select>
                             <option value="-">-</option>
                         </select> : data.category === 'Buty' || data.category === 'Skarpety' ?
-                            <select onChange={e => setData({...data, size: e.target.value})}>
+                            <select onChange={e => setData({...data, size: Number(e.target.value)})}>
                                 <option value="-">-</option>
                                 <option value="42">42</option>
                             </select> : <select onChange={e => setData({...data, size: e.target.value})}>
@@ -98,32 +124,38 @@ export const AddProduct = (props: Props) => {
 
                 <div>
                     <label>Kolor: </label>
-                    <p><input type="text" value={data.color} onChange={e => setData({...data, color: e.target.value})}/></p>
+                    <p><input type="text" value={data.color} onChange={e => setData({...data, color: e.target.value})}/>
+                    </p>
                 </div>
 
                 <div>
                     <label>Ilość: </label>
-                    <p><input type="number" value={data.quantity} onChange={e => setData({...data, quantity: Number(e.target.value)})}/></p>
+                    <p><input type="number" value={data.quantity}
+                              onChange={e => setData({...data, quantity: Number(e.target.value)})}/></p>
                 </div>
 
                 <div className="Products__add-textarea">
                     <label>Opis produktu: </label>
-                    <p><textarea value={data.description} onChange={e => setData({...data, description: e.target.value})}></textarea></p>
+                    <p><textarea value={data.description}
+                                 onChange={e => setData({...data, description: e.target.value})}></textarea></p>
                 </div>
 
                 <div>
                     <label>Link do zdjęcia: </label>
-                    <p><input type="text" value={data.picture} onChange={e => setData({...data, picture: e.target.value})}/></p>
+                    <p><input type="text" value={data.picture}
+                              onChange={e => setData({...data, picture: e.target.value})}/></p>
                 </div>
 
                 <div>
-                    <label>Link do zdjęcia: </label>
-                    <p><input type="text" value={data.picture} onChange={e => setData({...data, picture: e.target.value})}/></p>
+                    <label>Cena: </label>
+                    <p><input type="number" value={data.price}
+                              onChange={e => setData({...data, price: Number(e.target.value)})}/></p>
                 </div>
 
                 <button type="submit">Dodaj produkt</button>
                 <span onClick={() => props.close(false)}></span>
             </form>
+            <Notification msg={msg} succ={succ}/>
         </div>
     )
 
