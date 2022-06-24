@@ -4,6 +4,7 @@ import {Notification} from "../common/Notification/Notification";
 
 interface Props {
     id: string;
+    products: Product[],
     close: Dispatch<SetStateAction<boolean>>
 }
 
@@ -45,9 +46,9 @@ export const EditProduct = (props: Props) => {
 
     const id = props.id;
 
-    const handleEdit = async() => {
+    const handleEdit = async () => {
         await fetch(`http://localhost:3001/products/edit/${id}`, {
-            method: 'POST',
+            method: 'PATCH',
             body: JSON.stringify({data}),
             headers: {
                 'Content-Type': 'application/json',
@@ -69,13 +70,15 @@ export const EditProduct = (props: Props) => {
                 <form className="Products__add-form" onSubmit={handleEditSubmit} id={product.id} key={product.id}>
                     <div>
                         <label>Nazwa firmy: </label>
-                        <p><input type="text" value={data.firm} placeholder={product.firm} onChange={e => setData({...data, firm: e.target.value})}/>
+                        <p><input type="text" value={data.firm} placeholder={product.firm}
+                                  onChange={e => setData({...data, firm: e.target.value})}/>
                         </p>
                     </div>
 
                     <div>
                         <label>Model produktu: </label>
-                        <p><input type="text" value={data.model} placeholder={product.model} onChange={e => setData({...data, model: e.target.value})}/>
+                        <p><input type="text" value={data.model} placeholder={product.model}
+                                  onChange={e => setData({...data, model: e.target.value})}/>
                         </p>
                     </div>
 
@@ -97,10 +100,12 @@ export const EditProduct = (props: Props) => {
                             {product.category === '-' ? <select value={product.size}>
                                 <option value="-">-</option>
                             </select> : product.category === 'Buty' || product.category === 'Skarpety' ?
-                                <select value={data.size} onChange={e => setData({...data, size: Number(e.target.value)})}>
+                                <select value={data.size}
+                                        onChange={e => setData({...data, size: Number(e.target.value)})}>
                                     <option value="-">-</option>
                                     <option value="42">42</option>
-                                </select> : <select value={data.size} onChange={e => setData({...data, size: e.target.value})}>
+                                </select> :
+                                <select value={data.size} onChange={e => setData({...data, size: e.target.value})}>
                                     <option value="-">-</option>
                                     <option value="L">L</option>
                                 </select>}
@@ -109,7 +114,8 @@ export const EditProduct = (props: Props) => {
 
                     <div>
                         <label>Kolor: </label>
-                        <p><input type="text" value={data.color} placeholder={product.color} onChange={e => setData({...data, color: e.target.value})}/>
+                        <p><input type="text" value={data.color} placeholder={product.color}
+                                  onChange={e => setData({...data, color: e.target.value})}/>
                         </p>
                     </div>
 
@@ -145,3 +151,4 @@ export const EditProduct = (props: Props) => {
         </div>
     )
 }
+

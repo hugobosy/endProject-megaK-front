@@ -58,7 +58,7 @@ export const Products = () => {
         const nameDelItem = e.currentTarget.dataset.name
         deleteProduct(delItem)
 
-        setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
+        setMess(`Usunięto produkt ${nameDelItem} z bazy`)
         setSuccess(false)
         // @ts-ignore
         const newData = [...product].filter(item => item.id !== delItem);
@@ -87,7 +87,7 @@ export const Products = () => {
             <ProductList products={product} delete={handleDelete} edit={handleEdit}/>
             <Notification msg={mess} succ={success}/>
             {addActive ? <AddProduct close={setAddActive}/> : null}
-            {editActive ? <EditProduct id={editItem} close={setEditActive}/> : null}
+            {editActive ? <EditProduct close={setEditActive} id={editItem} products={product}/> : null}
 
         </div>
     )

@@ -18,7 +18,8 @@ export const ProductList = (props: Props) => {
                              alt="But"/>
                     </div>
                     <div className="Products__desc">
-                        <h2>{product.firm} {product.model}</h2>
+                        <h2>{product.firm}</h2>
+                        <h5>{product.model}</h5>
                         <p>{product.category}</p>
                         <p>{product.description.slice(0, 90)}...Czytaj więcej</p>
                         <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
