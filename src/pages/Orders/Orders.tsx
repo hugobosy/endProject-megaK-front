@@ -11,12 +11,11 @@ export const Orders = () => {
         (async() => {
             const res = await fetch('http://localhost:3001/orders');
             const data = res.json();
-            setOrders(await data)
+            setOrders(await data);
         })()
     }, [])
 
-    console.log(orders);
-
+    console.log(orders)
     return (
         <div className="page">
             <div className="Orders__info">
@@ -27,7 +26,7 @@ export const Orders = () => {
                     <p>Sprzedanych produktów: <span>liczba</span></p>
                 </div>
             </div>
-            <OrdersList/>
+            <OrdersList orders={orders}/>
         </div>
     )
 }

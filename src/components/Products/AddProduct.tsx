@@ -12,8 +12,6 @@ export const AddProduct = (props: Props) => {
         firm: '',
         model: '',
         category: '-',
-        size: '-',
-        color: '',
         price: 0,
         quantity: 0,
         description: '',
@@ -63,8 +61,6 @@ export const AddProduct = (props: Props) => {
             firm: '',
             model: '',
             category: '-',
-            size: '-',
-            color: '',
             price: 0,
             quantity: 0,
             description: '',
@@ -103,28 +99,6 @@ export const AddProduct = (props: Props) => {
                                 <option value={cat.name} key={cat.id}>{cat.name}</option>
                             ))}
                         </select>
-                    </p>
-                </div>
-
-                <div>
-                    <label>Rozmiar: </label>
-                    <p>
-                        {data.category === '-' ? <select>
-                            <option value="-">-</option>
-                        </select> : data.category === 'Buty' || data.category === 'Skarpety' ?
-                            <select onChange={e => setData({...data, size: Number(e.target.value)})}>
-                                <option value="-">-</option>
-                                <option value="42">42</option>
-                            </select> : <select onChange={e => setData({...data, size: e.target.value})}>
-                                <option value="-">-</option>
-                                <option value="L">L</option>
-                            </select>}
-                    </p>
-                </div>
-
-                <div>
-                    <label>Kolor: </label>
-                    <p><input type="text" value={data.color} onChange={e => setData({...data, color: e.target.value})}/>
                     </p>
                 </div>
 
