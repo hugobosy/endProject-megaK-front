@@ -28,9 +28,7 @@ export const OrdersList = (props: Props) => {
                             {order.products.split(', ').map(item => <p key={item}>{item}</p>)}
                         </div>
                         <div>
-                            <p>Jan Kowalski</p>
-                            <p>Armii Krajowej 6/3</p>
-                            <p>59-300 Lubin</p>
+                            {order.client.split(', ').map(cli => <p key={cli}>{cli}</p>)}
                         </div>
                         <p>{order.count}</p>
                         <p>{order.total}</p>
