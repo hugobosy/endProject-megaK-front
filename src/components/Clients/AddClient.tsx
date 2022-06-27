@@ -45,12 +45,6 @@ export const AddClient = (props: Props) => {
 
     }
 
-    function close() {
-        if (succ === null) {
-            props.setClient(false);
-        }
-    }
-
     const handleSubmitAddClient = (e: SyntheticEvent) => {
         e.preventDefault();
         if (!addForm.id) {
@@ -60,11 +54,11 @@ export const AddClient = (props: Props) => {
             })
         }
 
-        if (!addForm.name || addForm.name.length < 3 || addForm.name.length > 36 || !/^[A-Za-z]/.test(addForm.name)) {
+        if (!addForm.name || addForm.name.length < 3 || addForm.name.length > 36 || !/^[A-Za-z]+$/.test(addForm.name)) {
             setSucc(false)
             setMsg('Imię powinno mieć minimum 3 znaki oraz maks 36 znaków bez liczb')
             closeNotification()
-            return false
+            return
         }
         if (!addForm.surname || addForm.surname.length < 2 || addForm.surname.length > 96 || !/^[A-Za-z]/.test(addForm.surname)) {
             setSucc(false)
@@ -182,8 +176,8 @@ export const AddClient = (props: Props) => {
                 </div>
                 <button type="submit">Dodaj klienta</button>
                 <span onClick={() => props.setClient(false)}></span>
-                <Notification msg={msg} succ={succ}/>
             </form>
+            <Notification msg={msg} succ={succ}/>
         </div>
     )
 }

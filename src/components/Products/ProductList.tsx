@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {AdCategory, Product} from "types";
+import React, {MouseEventHandler} from "react";
+import {Product} from "types";
 
 interface Props {
     products: Product[]
+    delete: MouseEventHandler
+    edit: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
@@ -16,14 +18,15 @@ export const ProductList = (props: Props) => {
                              alt="But"/>
                     </div>
                     <div className="Products__desc">
-                        <h2>{product.firm} {product.model}</h2>
-                        <p>{product.name}</p>
-                        <p>{product.description.slice(0, 100)}...Czytaj więcej</p>
+                        <h2>{product.firm}</h2>
+                        <h5>{product.model}</h5>
+                        <p>{product.category}</p>
+                        <p>{product.description.slice(0, 90)}...Czytaj więcej</p>
                         <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
-                            <button>Edytuj</button>
-                            <button>Usuń</button>
+                            <button onClick={props.edit} id={product.id}>Edytuj</button>
+                            <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
                         </div>
                     </div>
                 </div>

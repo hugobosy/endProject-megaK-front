@@ -33,7 +33,7 @@ export const Category = () => {
             setSuccess(null)
         }, 3000)
     }
-
+    // @todo wyeksportuj funckje closeNotification do osobnego pliku
     const addData = async () => {
         try {
             await fetch('http://localhost:3001/category/add', {
@@ -119,3 +119,5 @@ export const Category = () => {
         </div>
     )
 }
+
+// todo zrób przeładowanie strony po dodaniu kategorii
