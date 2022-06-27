@@ -15,15 +15,18 @@ export const Orders = () => {
         })()
     }, [])
 
-    console.log(orders)
+    const sumPrice = orders.map(order => order.total).reduce((prev,curr) => prev+curr, 0)
+    const sumCount = orders.map(order => order.count).reduce((prev,curr) => prev+curr, 0)
+
     return (
         <div className="page">
             <div className="Orders__info">
                 <h1>Zamówienia</h1>
+                <button>Symuluj zamówienie</button>
                 <div className="Orders__info-content">
-                    <p>Liczba zamówień: <span>liczba</span></p>
-                    <p>Kwota zamówień: <span>liczba</span></p>
-                    <p>Sprzedanych produktów: <span>liczba</span></p>
+                    <p>Liczba zamówień: <span>{orders.length}</span></p>
+                    <p>Kwota zamówień: <span>{sumPrice.toFixed(2)}</span></p>
+                    <p>Sprzedanych produktów: <span>{sumCount}</span></p>
                 </div>
             </div>
             <OrdersList orders={orders}/>

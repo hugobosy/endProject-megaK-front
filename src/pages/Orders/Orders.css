@@ -35,6 +35,18 @@
 .Orders__info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.Orders__info button {
+    font-size: 18px;
+    padding: 10px 30px;
+    border: none;
+    background-color: #2bd511;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
+    cursor: pointer;
 }
 
 .Orders__info-content {
