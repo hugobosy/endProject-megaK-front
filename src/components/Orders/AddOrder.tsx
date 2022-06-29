@@ -96,12 +96,15 @@ export const AddOrder = (props: Props) => {
                     <legend>Wybierz klienta</legend>
 
 
-                    {client.map(client => <select key={client.id} value={data.client}
-                                                  onChange={e => setData({...data, client: e.target.value})}>
+                    <select value={data.client}
+                            onChange={e => setData({...data, client: e.target.value})}>
                         <option value="-">-</option>
-                        <option id={client.id}
-                                value={`${client.name} ${client.surname}, ${client.address}, ${client.code} ${client.city}`}>{client.name} {client.surname}</option>
-                    </select>)}
+                        {client.map(client =>
+                        <>
+                            <option  key={client.id} id={client.id}
+                                    value={`${client.name} ${client.surname}, ${client.address}, ${client.code} ${client.city}`}>{client.name} {client.surname}</option>
+                        </>
+                    )}</select>
 
                 </fieldset>
                 <span onClick={() => props.close(false)}></span>
