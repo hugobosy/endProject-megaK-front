@@ -1,4 +1,4 @@
-import React, {Dispatch, MouseEventHandler, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
 import {ClientType, Product} from "types";
 import {v4 as uuid} from 'uuid';
 
@@ -20,11 +20,9 @@ export const AddOrder = (props: Props) => {
 
     const [client, setClient] = useState<ClientType[]>([]);
     const [product, setProduct] = useState<Product[]>([]);
-    const [basket, setBasket] = useState([])
-
 
     const [data, setData] = useState<Data>({
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleString(),
         id: uuid(),
         products: '',
         client: '',
