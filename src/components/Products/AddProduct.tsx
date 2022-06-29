@@ -64,7 +64,7 @@ export const AddProduct = (props: Props) => {
             price: 0,
             quantity: 0,
             description: '',
-            picture: ''
+            picture: '',
         })
     }
 
