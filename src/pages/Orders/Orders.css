@@ -4,7 +4,7 @@
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    box-shadow: 0 0 10px -2px rgba(0,0,0,.05);
+    box-shadow: 0 0 10px -2px rgba(0, 0, 0, .05);
 }
 
 .Orders h2 {
@@ -14,7 +14,7 @@
 .Orders__header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    border-bottom: 2px solid rgba(0,0,0,.1);
+    border-bottom: 2px solid rgba(0, 0, 0, .1);
     padding: 0 20px;
 }
 
@@ -28,13 +28,25 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     align-items: center;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
     padding: 20px;
 }
 
 .Orders__info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.Orders__info button {
+    font-size: 18px;
+    padding: 10px 30px;
+    border: none;
+    background-color: #2bd511;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
+    cursor: pointer;
 }
 
 .Orders__info-content {
@@ -42,7 +54,7 @@
     padding: 20px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    box-shadow: 0 -8px 10px -5px rgba(0,0,0,.05);
+    box-shadow: 0 -8px 10px -5px rgba(0, 0, 0, .05);
 }
 
 .Orders__info-content p {
@@ -56,4 +68,69 @@
     display: inline-block;
     margin-left: 20px;
     font-weight: normal;
+}
+
+.Orders__add-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% - 150px), -60%);
+    background-color: #fff;
+    width: 50%;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .02);
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.Orders__add-form span {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.Orders__add-form span::before,
+.Orders__add-form span::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background-color: #000;
+    transform: translateX(-50%);
+}
+
+.Orders__add-form span::before {
+    transform: rotate(45deg);
+}
+
+.Orders__add-form span::after {
+    transform: rotate(-45deg);
+}
+
+.Orders__add-form fieldset {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.Orders__select-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding: 20px;
+    column-gap: 20px;
+}
+
+.Orders__select-product img {
+    max-width: 100%;
+}
+
+.Orders__select-product button {
+    margin-top: 20px;
 }
