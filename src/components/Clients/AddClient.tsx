@@ -7,8 +7,6 @@ interface Props {
     setClient: Dispatch<SetStateAction<boolean>>
 }
 
-const date = new Date().toLocaleDateString();
-
 export const AddClient = (props: Props) => {
 
     const [addForm, setAddForm] = useState({
@@ -20,7 +18,7 @@ export const AddClient = (props: Props) => {
         city: '',
         phone: Number(''),
         gender: '-',
-        birth: date,
+        birth: new Date().toLocaleString(),
         email: '',
     })
 

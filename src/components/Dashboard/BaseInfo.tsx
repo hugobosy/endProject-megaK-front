@@ -13,11 +13,11 @@ export const BaseInfo = (props: Props) => {
 
     const lastOrder = props.orders.map(order => order.date);
     const lastComingCash = props.orders.map(order => order.total);
+    const lastUser = props.users.map(user => `${user.name} ${user.surname}`);
     const lastVat = props.orders.map(order => (23 / 123 * order.total).toFixed(2));
     const totalCash = props.orders.map(order => order.total).reduce((prev, curr) => prev + curr, 0);
     const totalVat = props.orders.map(order => 23 / 123 * order.total).reduce((prev, curr) => prev + curr, 0);
 
-    console.log(props.orders)
 
 
     return (
@@ -49,9 +49,9 @@ export const BaseInfo = (props: Props) => {
             <div className="Dashboard__base-item">
                 <span className="Dashboard__base-icon"><User size="30"/></span>
                 <div className="Dashboard__base-content">
-                    <p>Najnowsi użytkownicy</p>
-                    <p>(ilość uzytkowników)</p>
-                    <p>Ostatnio zarejestrowany uzytkownik</p>
+                    <p>Liczba klientów</p>
+                    <p>{props.users.length}</p>
+                    <p>Najnowszy klient: {lastUser[0]}</p>
                 </div>
                 {/*todo tutaj wczytywanie danych z bazy */}
             </div>
