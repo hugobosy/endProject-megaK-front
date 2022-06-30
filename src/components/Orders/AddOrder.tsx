@@ -50,22 +50,28 @@ export const AddOrder = (props: Props) => {
         getProduct()
     }, [])
 
+
     const addToBasket = (e: SyntheticEvent) => {
         e.preventDefault();
 
-        setData({
-            ...data,
-            // @ts-ignore
-            products: data.products.concat(`${e.target.name}, `),
-            count: listProduct.length,
-            // @ts-ignore
-            total: data.total + Number(e.currentTarget.dataset.price),
-            // @ts-ignore
-            buy: [...data.buy, {id: e.currentTarget.id, count: e.currentTarget.dataset.count}]
-        })
-    }
+       const filtered = data.buy.filter(item => item.id === e.currentTarget.id)
 
-    const listProduct = data.products.split(', ');
+        if(filtered.length !== 0) {
+            alert('Taki produkt juz jest w koszyku!')
+        } else {
+            setData({
+                ...data,
+                // @ts-ignore
+                products: data.products.concat(`${e.target.name}, `),
+                count: data.products.split(', ').length,
+                // @ts-ignore
+                total: data.total + Number(e.currentTarget.dataset.price),
+                // @ts-ignore
+                buy: [...data.buy, {id: e.currentTarget.id, count: e.currentTarget.dataset.count}]
+            })
+        }
+
+    }
 
     const buy = async () => {
         await fetch('http://localhost:3001/orders/simulate', {
@@ -120,7 +126,7 @@ export const AddOrder = (props: Props) => {
 
                 <div className="Orders__basket">
                     Koszyk
-                    {listProduct.map(item => <p>{item}</p>)}
+                    {data.products.split(', ').map(item => <p>{item}</p>)}
                     Koszt
                     <p>{data.total}</p>
                 </div>
