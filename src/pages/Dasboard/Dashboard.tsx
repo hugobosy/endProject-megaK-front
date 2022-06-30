@@ -29,7 +29,8 @@ export const Dashboard = () => {
 
             <BaseInfo users={users} orders={orders}/>
             <LatestSell orders={orders} products={products}/>
-            <PurchaseHistory/>
+            <PurchaseHistory orders={orders}/>
+        {/*    todo po kliknięciu w id zakupu niech wyswietli sie coś w formie faktury*/}
         </div>
     )
 }
