@@ -96,14 +96,13 @@ export const AddOrder = (props: Props) => {
             <div className="Orders__add-form">
                 <fieldset>
                     <legend>Wybierz produkt/produkty które chcesz kupić</legend>
-                    {product.map(product =>
-                        <div key={product.id} className="Orders__select-product">
+                    {product.map(product => product.quantity ? <div key={product.id} className="Orders__select-product">
                             <p><img src={product.picture} alt="Produkt"/><strong>{product.firm} {product.model}</strong>
                             </p>
                             <button onClick={addToBasket} name={`${product.firm} ${product.model}`}
                                     data-price={product.price} data-count={1} id={product.id}>Dodaj produkt
                             </button>
-                        </div>
+                        </div> : null
                     )}
                 </fieldset>
 

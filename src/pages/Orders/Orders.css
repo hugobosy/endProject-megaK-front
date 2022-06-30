@@ -113,8 +113,9 @@
 
 .Orders__add-form fieldset {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    width: 50%;
+    width: 100%;
 }
 
 .Orders__select-product {

@@ -17,7 +17,7 @@ export const ProductList = (props: Props) => {
                         <img src={product.picture}
                              alt="But"/>
                     </div>
-                    <div className="Products__desc">
+                    <div className="Products__desc" style={product.quantity ? {background: "#ffffff"} : {background: "#ff0000", color: "#fff"}}>
                         <h2>{product.firm}</h2>
                         <h5>{product.model}</h5>
                         <p>{product.category}</p>
@@ -27,6 +27,7 @@ export const ProductList = (props: Props) => {
                         <div className="Products__btn">
                             <button onClick={props.edit} id={product.id}>Edytuj</button>
                             <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
+                        {/*    todo dodaj tutaj przycisk do symulacji zamówienia*/}
                         </div>
                     </div>
                 </div>

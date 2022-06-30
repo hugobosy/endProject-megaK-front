@@ -1,4 +1,5 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
+import {v4 as uuid} from 'uuid';
 import {AdCategory, Product} from "types";
 import {Notification} from "../common/Notification/Notification";
 
@@ -9,6 +10,7 @@ interface Props {
 export const AddProduct = (props: Props) => {
 
     const [data, setData] = useState<Product>({
+        id: uuid(),
         firm: '',
         model: '',
         category: '-',
@@ -58,6 +60,7 @@ export const AddProduct = (props: Props) => {
         closeNotification()
         setAccept(true)
         setData({
+            id: '',
             firm: '',
             model: '',
             category: '-',
