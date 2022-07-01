@@ -9,7 +9,8 @@ interface Data {
     client: string,
     count: number,
     total: number,
-    payment: boolean
+    payment: boolean,
+    buy: { id: string, count: number }[]
 }
 
 interface Props {
@@ -29,6 +30,7 @@ export const AddOrder = (props: Props) => {
         count: 0,
         total: 0,
         payment: false,
+        buy: [],
     })
 
     const getClient = async () => {
@@ -48,15 +50,30 @@ export const AddOrder = (props: Props) => {
         getProduct()
     }, [])
 
+
     const addToBasket = (e: SyntheticEvent) => {
         e.preventDefault();
-        // @ts-ignore
-        setData({...data, products: data.products.concat(`${e.target.name}, `), count: listProduct.length, total: data.total + Number(e.currentTarget.dataset.price)})
+
+       const filtered = data.buy.filter(item => item.id === e.currentTarget.id)
+
+        if(filtered.length !== 0) {
+            alert('Taki produkt juz jest w koszyku!')
+        } else {
+            setData({
+                ...data,
+                // @ts-ignore
+                products: data.products.concat(`${e.target.name}, `),
+                count: data.products.split(', ').length,
+                // @ts-ignore
+                total: data.total + Number(e.currentTarget.dataset.price),
+                // @ts-ignore
+                buy: [...data.buy, {id: e.currentTarget.id, count: e.currentTarget.dataset.count}]
+            })
+        }
+
     }
 
-    const listProduct = data.products.split(', ');
-
-    const buy = async() => {
+    const buy = async () => {
         await fetch('http://localhost:3001/orders/simulate', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -70,7 +87,7 @@ export const AddOrder = (props: Props) => {
     const handleBuy = (e: SyntheticEvent) => {
         e.preventDefault()
         buy();
-        setTimeout(()=> props.close, 1000)
+        setTimeout(() => props.close, 1000)
 
     }
 
@@ -79,14 +96,13 @@ export const AddOrder = (props: Props) => {
             <div className="Orders__add-form">
                 <fieldset>
                     <legend>Wybierz produkt/produkty które chcesz kupić</legend>
-                    {product.map(product =>
-                        <div key={product.id} className="Orders__select-product">
+                    {product.map(product => product.quantity ? <div key={product.id} className="Orders__select-product">
                             <p><img src={product.picture} alt="Produkt"/><strong>{product.firm} {product.model}</strong>
                             </p>
                             <button onClick={addToBasket} name={`${product.firm} ${product.model}`}
-                                    data-price={product.price} id={product.id}>Dodaj produkt
+                                    data-price={product.price} data-count={1} id={product.id}>Dodaj produkt
                             </button>
-                        </div>
+                        </div> : null
                     )}
                 </fieldset>
 
@@ -98,18 +114,18 @@ export const AddOrder = (props: Props) => {
                             onChange={e => setData({...data, client: e.target.value})}>
                         <option value="-">-</option>
                         {client.map(client =>
-                        <>
-                            <option  key={client.id} id={client.id}
-                                    value={`${client.name} ${client.surname}, ${client.address}, ${client.code} ${client.city}`}>{client.name} {client.surname}</option>
-                        </>
-                    )}</select>
+                            <>
+                                <option key={client.id} id={client.id}
+                                        value={`${client.name} ${client.surname}, ${client.address}, ${client.code} ${client.city}`}>{client.name} {client.surname}</option>
+                            </>
+                        )}</select>
 
                 </fieldset>
                 <span onClick={() => props.close(false)}></span>
 
                 <div className="Orders__basket">
                     Koszyk
-                    {listProduct.map(item => <p>{item}</p>)}
+                    {data.products.split(', ').map(item => <p>{item}</p>)}
                     Koszt
                     <p>{data.total}</p>
                 </div>

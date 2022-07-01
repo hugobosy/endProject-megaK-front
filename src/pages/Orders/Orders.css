@@ -113,10 +113,15 @@
 
 .Orders__add-form fieldset {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    width: 50%;
+    width: 100%;
 }
 
+.Orders__add-form fieldset:nth-of-type(1) {
+    height: 500px;
+    overflow: scroll;
+}
 .Orders__select-product {
     display: flex;
     flex-direction: column;

@@ -1,13 +1,23 @@
-import React, {MouseEventHandler} from "react";
+import React, {MouseEventHandler, useEffect, useState} from "react";
 import {Product} from "types";
 
 interface Props {
-    products: Product[]
+    products:Product[]
+    sort: string
     delete: MouseEventHandler
     edit: MouseEventHandler
+    orderNow: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
+
+    const [sorted, setSorted] = useState([]);
+
+    // switch (props.sort) {
+    //     case 'expensive':
+    //         const sort = props.products.map(item => item).sort((a, b) => a.price - b.price)
+    //         break;
+    // }
 
     return (
         <div className="Products__list">
@@ -17,17 +27,19 @@ export const ProductList = (props: Props) => {
                         <img src={product.picture}
                              alt="But"/>
                     </div>
-                    <div className="Products__desc">
+                    <div className="Products__desc" style={product.quantity ? {background: "#ffffff"} : {background: "#d37878", color: "#fff"}}>
                         <h2>{product.firm}</h2>
                         <h5>{product.model}</h5>
                         <p>{product.category}</p>
-                        <p>{product.description.slice(0, 90)}...Czytaj więcej</p>
+                        <p>{product.description.slice(0, 90)}... Czytaj więcej</p>
                         <p><span>Pozostałych sztuk: </span> {product.quantity}</p>
                         <p>{product.price} zł</p>
                         <div className="Products__btn">
                             <button onClick={props.edit} id={product.id}>Edytuj</button>
                             <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
+                            {product.quantity ? null : <button onClick={props.orderNow} id={product.id}>Zamów</button>}
                         </div>
+                    {/*    todo dodaj potierdzenia do usunięcia produktu*/}
                     </div>
                 </div>
             ))}

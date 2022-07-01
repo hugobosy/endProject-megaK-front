@@ -7,6 +7,7 @@ import {Product} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddProduct} from "../../components/Products/AddProduct";
 import {EditProduct} from "../../components/Products/EditProduct";
+import {OrderNow} from "../../components/Products/OrderNow";
 
 export const Products = () => {
 
@@ -15,7 +16,12 @@ export const Products = () => {
     const [success, setSuccess] = useState<boolean | null>(null);
     const [addActive, setAddActive] = useState<boolean>(false);
     const [editActive, setEditActive] = useState<boolean>(false);
-    const [editItem, setEditItem] = useState<string>('')
+    const [editItem, setEditItem] = useState<string>('');
+    const [orderProduct, setOrderProduct] = useState({
+        active: false,
+        id: '',
+    })
+    const [sort, setSort] = useState('-')
 
     const getProducts = async () => {
         const res = await fetch('http://localhost:3001/products');
@@ -60,18 +66,24 @@ export const Products = () => {
 
         setMess(`Usunięto produkt ${nameDelItem} z bazy`)
         setSuccess(false)
-        // @ts-ignore
+
         const newData = [...product].filter(item => item.id !== delItem);
-        // @ts-ignore
+
         setProduct(newData);
         closeNotification()
     }
     // todo przy błedach usuwania itp postaraj się wyświetlać belkę z informacją
 
-    const handleEdit = (e:SyntheticEvent) => {
+    const handleEdit = (e: SyntheticEvent) => {
         setEditActive(true)
         setEditItem(e.currentTarget.id)
     }
+
+    const orderNow = (e: SyntheticEvent) => {
+        setOrderProduct({...orderProduct, active: true, id: e.currentTarget.id});
+    }
+
+
 
     return (
         <div className="page">
@@ -82,13 +94,20 @@ export const Products = () => {
                 <SearchProduct/>
             </div>
 
-            <ProductSort/>
+            <ProductSort handleSort={setSort} sort={sort}/>
 
-            <ProductList products={product} delete={handleDelete} edit={handleEdit}/>
+            <ProductList
+                products={product}
+                sort={sort}
+                delete={handleDelete}
+                edit={handleEdit}
+                orderNow={orderNow}
+            />
+
             <Notification msg={mess} succ={success}/>
             {addActive ? <AddProduct close={setAddActive}/> : null}
             {editActive ? <EditProduct close={setEditActive} id={editItem} products={product}/> : null}
-
+            {orderProduct.active ? <OrderNow product={product} id={orderProduct.id} close={setOrderProduct}/> : null}
         </div>
     )
 }

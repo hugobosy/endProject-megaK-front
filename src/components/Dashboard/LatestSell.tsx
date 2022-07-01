@@ -1,6 +1,13 @@
 import React from "react";
+import {Order, Product} from "types";
 
-export const LatestSell = () => {
+interface Props {
+    orders: Order[],
+    products: Product[]
+}
+
+export const LatestSell = (props: Props) => {
+
     return (
         <div className="Dashboard__latest-sell">
             <h2>Najlepiej sprzedajace się produkty</h2>
@@ -9,27 +16,19 @@ export const LatestSell = () => {
                 <p>Id produktu</p>
                 <p>Nazwa produktu</p>
                 <p>Cena</p>
-                <p>Stan</p>
+                <p>Sprzedanych</p>
             </div>
-            <div className="Dashboard__latest-item">
-                <img
-                    src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/78e78695-74ab-4162-b052-67f004aad13b/buty-do-golfa-air-max-270-g-3GkJ0N.png"
-                    alt="But"/>
-                <span>354685-235465-126-156146</span>
-                <span>Buty Nike Air90</span>
-                <span>699zł</span>
-                <span>3</span>
-                {/*//todo Tutaj musi być wczytywanie z bazy danych za pomocą map*/}
-            </div>
-            <div className="Dashboard__latest-item">
-                <img
-                    src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/78e78695-74ab-4162-b052-67f004aad13b/buty-do-golfa-air-max-270-g-3GkJ0N.png"
-                    alt="But"/>
-                <span>354685-235465-126-156146</span>
-                <span>Buty Nike Air90</span>
-                <span>699zł</span>
-                <span>3</span>
-            </div>
+            {props.products.map((product, index) => (
+                index < 3 ? <div key={product.id} className="Dashboard__latest-item">
+                    <img
+                        src={product.picture}
+                        alt="But"/>
+                    <span>{product.id}</span>
+                    <span>{`${product.firm} ${product.model}`}</span>
+                    <span>{product.price} zł</span>
+                    <span>{product.quantity_sells}</span>
+                </div> : null
+            ))}
         </div>
     )
 }
