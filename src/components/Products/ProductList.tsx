@@ -1,14 +1,23 @@
-import React, {MouseEventHandler} from "react";
+import React, {MouseEventHandler, useEffect, useState} from "react";
 import {Product} from "types";
 
 interface Props {
-    products: Product[]
+    products:Product[]
+    sort: string
     delete: MouseEventHandler
     edit: MouseEventHandler
     orderNow: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
+
+    const [sorted, setSorted] = useState([]);
+
+    // switch (props.sort) {
+    //     case 'expensive':
+    //         const sort = props.products.map(item => item).sort((a, b) => a.price - b.price)
+    //         break;
+    // }
 
     return (
         <div className="Products__list">

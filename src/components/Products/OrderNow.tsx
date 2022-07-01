@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useState} from "react";
 import {Product} from "types";
+import {Notification} from "../common/Notification/Notification";
 
 interface Props {
     product: Product[]
@@ -14,10 +15,19 @@ export const OrderNow = (props: Props) => {
         id: props.id,
         count: '',
     })
+    const [succ, setSucc] = useState<boolean | null>(null)
+    const [msg, setMsg] = useState<string>('')
+    const [accept, setAccept] = useState<boolean>(false)
+
+    const closeNotification = () => {
+        setTimeout(() => {
+            setSucc(null)
+        }, 1500)
+    }
 
     const orderNow = async() => {
         await fetch(`http://localhost:3001/products/order`, {
-            method: 'POST',
+            method: 'PATCH',
             body: JSON.stringify(order),
             headers: {
                 'Content-type': 'application/json'
@@ -28,13 +38,23 @@ export const OrderNow = (props: Props) => {
     const handleOrder = (e: SyntheticEvent) => {
         e.preventDefault()
         orderNow();
+        setSucc(true);
+        setMsg(`Zamówiłeś ${order.count} sztuk produktu ${item.map(item => `${item.firm} ${item.model}`)}`);
+        closeNotification();
+        setAccept(true)
     }
 
+    if (accept) {
+        setTimeout(() => {
+            props.close({active: false, id: ""})
+            window.location.reload()
+        }, 2000)
+    }
     return(
         <div className="OrderNow">
             <div className="OrderNow__content">
                 {item.map(item => (
-                    <div className="OrderNow__item">
+                    <div key={item.id} className="OrderNow__item">
                         <h2>{item.firm}</h2>
                         <h4>{item.model}</h4>
                         <div className="OrderNow__item-img">
@@ -49,6 +69,7 @@ export const OrderNow = (props: Props) => {
                 </div>
                 <span className="close" onClick={()=> props.close({active: false, id: ""})}></span>
             </div>
+            <Notification msg={msg} succ={succ}/>
         </div>
     )
 }

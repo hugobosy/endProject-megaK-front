@@ -21,6 +21,7 @@ export const Products = () => {
         active: false,
         id: '',
     })
+    const [sort, setSort] = useState('-')
 
     const getProducts = async () => {
         const res = await fetch('http://localhost:3001/products');
@@ -73,14 +74,16 @@ export const Products = () => {
     }
     // todo przy błedach usuwania itp postaraj się wyświetlać belkę z informacją
 
-    const handleEdit = (e:SyntheticEvent) => {
+    const handleEdit = (e: SyntheticEvent) => {
         setEditActive(true)
         setEditItem(e.currentTarget.id)
     }
 
-    const orderNow = (e:SyntheticEvent) => {
+    const orderNow = (e: SyntheticEvent) => {
         setOrderProduct({...orderProduct, active: true, id: e.currentTarget.id});
     }
+
+
 
     return (
         <div className="page">
@@ -91,9 +94,16 @@ export const Products = () => {
                 <SearchProduct/>
             </div>
 
-            <ProductSort/>
+            <ProductSort handleSort={setSort} sort={sort}/>
 
-            <ProductList products={product} delete={handleDelete} edit={handleEdit} orderNow={orderNow}/>
+            <ProductList
+                products={product}
+                sort={sort}
+                delete={handleDelete}
+                edit={handleEdit}
+                orderNow={orderNow}
+            />
+
             <Notification msg={mess} succ={success}/>
             {addActive ? <AddProduct close={setAddActive}/> : null}
             {editActive ? <EditProduct close={setEditActive} id={editItem} products={product}/> : null}
