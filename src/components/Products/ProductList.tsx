@@ -5,6 +5,7 @@ interface Props {
     products: Product[]
     delete: MouseEventHandler
     edit: MouseEventHandler
+    orderNow: MouseEventHandler
 }
 
 export const ProductList = (props: Props) => {
@@ -27,7 +28,7 @@ export const ProductList = (props: Props) => {
                         <div className="Products__btn">
                             <button onClick={props.edit} id={product.id}>Edytuj</button>
                             <button onClick={props.delete} id={product.id} data-name={`${product.firm} ${product.model}`}>Usuń</button>
-                            {product.quantity ? null : <button id={product.id}>Zamów</button>}
+                            {product.quantity ? null : <button onClick={props.orderNow} id={product.id}>Zamów</button>}
                         </div>
                     {/*    todo dodaj potierdzenia do usunięcia produktu*/}
                     </div>

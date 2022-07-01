@@ -17,13 +17,13 @@ export const PurchaseHistory = (props: Props) => {
                 <p>Płatność</p>
             </div>
             {props.orders.map(order => (
-                <div className="Dashboard__purchase-item">
+                <div key={order.id} className="Dashboard__purchase-item">
                     <span>{order.id}</span>
                     <div>
-                        {order.products.split(', ').map(item => <p>{item}</p>)}
+                        {order.products.split(', ').map(item => <p key={item}>{item}</p>)}
                     </div>
                     <div>
-                        {order.client.split(', ').map(item => <p>{item}</p>)}
+                        {order.client.split(', ').map(item => <p key={item}>{item}</p>)}
                     </div>
                     <span>{order.total}</span>
                     <span>{order.payment ? 'Opłacone' : 'W trakcie'}</span>

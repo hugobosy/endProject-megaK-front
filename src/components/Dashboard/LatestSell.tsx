@@ -19,7 +19,7 @@ export const LatestSell = (props: Props) => {
                 <p>Sprzedanych</p>
             </div>
             {props.products.map((product, index) => (
-                index < 3 ? <div className="Dashboard__latest-item">
+                index < 3 ? <div key={product.id} className="Dashboard__latest-item">
                     <img
                         src={product.picture}
                         alt="But"/>
