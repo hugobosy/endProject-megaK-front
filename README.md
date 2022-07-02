@@ -5,19 +5,27 @@
 ## Panel administracyjny hipotetycznego sklepu internetowego
 
 1. [Wstęp](#Wstęp)
-2. [Uruchomienie programu](#uruchomienie-programu)
-3. [Wykorzystane technologie](#wykorzystane-technologie--paczki--jezyki-programowania)
-4. [Opis działania programu](#opis-dzialania-programu)
+2. [Plany rozwoju aplikacji](#plany-rozwoju-aplikacji)
+3. [Uruchomienie programu](#uruchomienie-programu)
+4. [Wykorzystane technologie](#wykorzystane-technologie--paczki--jezyki-programowania)
+5. [Opis działania programu](#opis-dzialania-programu)
     - [Dashboard](##dashboard)
     - [Produkty](##produkty)
     - [Zamówienia](##Zamówienia)
     - [Kategorie](##Kategorie)
     - [Klienci](##Klienci)
-5. [Rozwój](#rozwj)
 
 # Wstęp
 
 ### Mój pierwszy większy projekt full stack. Projekt ma symulować panel administracyjny sklepu internetowego. Można dodawać nowe produkty do bazy, można symulować zamówienia, dodawać klientów i tworzyć kategorie. Projekt jest w podstawowej wersji działania i bedzie rozwijany o kolejne funkcje.
+
+# Plany rozwoju aplikacji
+
+1. Po wykonaniu czynności u góry po prawej stronie przy dzwoneczku będzie wyświetlało się powiadomienie z wiadomością jaka czynność została wykonana
+2. Podpięcie prostego sklepu internetowego z możliwością zalogowania się klienta oraz admina, który będzie mógł wejść na panel administracyjny
+3. Możliwość wysłania wiadomości do sklepu i ta wiadomość zostanie przesłana do panelu admina z powiadomieniem przy kopercie
+4. Wprowadzanie poprawek i usprawnień
+5. Stworzenie Todo listy na stronie zadania gdzie admin będzie mógł stworzyć sobie listę zadań na następny dzień
 
 # Uruchomienie programu
 
@@ -119,3 +127,24 @@ Zrobione! :smiley:
 
 ## Kategorie
 
+![category](./images/category.png)
+
+> 1. Strona posiada zbiór kategorii produktów w sklepie
+> 2. Kategorie mozna dodawać w formularzu po prawej stronie
+> 3. Kategorie mozna usuwać klikając ikonkę kosza (aktualnie po kliknieciu automatycznie jest usuwana kategoria, w przyszłości będzie po kliknięciu potwierdzenie czy na pewno chcemy usunąc)
+
+## Klienci
+
+![clients](./images/clients.png)
+
+> 1. Strona wyświetla wszystkich "zarejestrowanych" klientów sklepu
+> 2. Klienta mozna usunąć klikając na ikonę śmietnika(nie dodano jeszcze potwierdzenia)
+> 3. Klienta mozna zbanować klikając w czerwoną dłoń
+
+### Dodawanie klienta
+
+![addClient](./images/addClient.png)
+
+> 1. Po kliknięciu w przycisk dodaj klienta wyskoczy okienko z formularzem
+> 2. Wszystkie dane muszą być wprowadzone
+> 3. Formularz posiada podstawową walidację
