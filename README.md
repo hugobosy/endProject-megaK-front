@@ -6,8 +6,8 @@
 
 1. [Wstęp](#Wstęp)
 2. [Uruchomienie programu](#uruchomienie-programu)
-3. [Wykorzystane technologie](#wykorzystane-technologie--paczki--jzyki-programowania)
-4. [Opis działania programu](#opis-dziaania-programu)
+3. [Wykorzystane technologie](#wykorzystane-technologie--paczki--jezyki-programowania)
+4. [Opis działania programu](#opis-dzialania-programu)
     - [Dashboard](##dashboard)
     - [Produkty](##produkty)
     - [Zamówienia](##Zamówienia)
@@ -54,7 +54,7 @@ Jeżeli masz inne dane, musisz je edytować w ten sposób, aby odpowiadały Twoj
 
 Zrobione! :smiley:
 
-# Wykorzystane technologie / paczki / języki programowania
+# Wykorzystane technologie / paczki / jezyki programowania
 
 | Technologia, paczka, język programowania |           Opis            |  Wersja                |
 |:---                                      |:-------------------------:|-----------------------:|
@@ -67,7 +67,7 @@ Zrobione! :smiley:
 |UUID|Generator unikalnych ID|8.3.2|
 |@styled-icons/boxicons-(typ)| Ikony |10.38|
 
-# Opis działania programu
+# Opis dzialania programu
 
 ## Dashboard
 
@@ -80,7 +80,7 @@ Zrobione! :smiley:
 
 ## Produkty
 
-![Dashboard](./images/products.png)
+![Products](./images/products.png)
 
 > 1. W zakładce produkty widzimy listę produktów jakie są w bazie
 > 2. Zdjęcia produktów są wstawiane do bazy w formie odnośników do obrazków
@@ -89,15 +89,33 @@ Zrobione! :smiley:
 > 5. Mozna sortować produkty po wybranych opcjach oraz wyszukać produkt
 
 #### Dodawanie produktu
-![Dashboard](./images/addProduct.png)
+![addProduct](./images/addProduct.png)
 
 > 1. Po kliknięciu w przycisk Dodaj produkt wyskoczy nam takie okienko
 > 2. Musimy wypełnić kazde pole inaczej wyświetli się nam stosowna informacja (w czasie tworzenia readme walidacja formularza jeszcze nie jest wprowadzona!)
 > 3. Po dodaniu produktu wyświetli się informacja ze produkt został dodany do bazy oraz po zniknięciu informacji strona zostanie przeładowana.
 
-![Dashboard](./images/greenInfo.png)
+![greenInfo](./images/greenInfo.png)
 
 #### Edycja produktu
-![Dashboard](./images/editProduct.png)
+![editProduct](./images/editProduct.png)
 
 > 1. Po kliknięciu Edytuj pojawi się okienko takie same jak dodawanie produktu, z tym że pewne informacje takie jak opis czy link do zdjęcia pozostaną wyświetlone w placeholder. W przyszłości zostanie to zmienione na zwykły tekst do edycji, bo w tej wersji musimy na nowo wprowadzać wszystkie dane.
+
+## Zamówienia
+![orders](./images/orders.png)
+
+> 1. Strona zamówienia posiada listę wszystkich zamówień
+> 2. Po prawej stronie mamy podsumowanie liczby zamówień, łączną kwotę oraz ile sprzedaliśmy produktów
+> 3. NA środku jest przycisk gdzie mozemy zasymulować zakupy
+
+![simulate](./images/sim.png)
+
+> 1. Po kliknięciu Symuluj zamówienie wyskoczy okienko z listą produktów z wyborem klienta i zatwierdzenia symulacji
+> 2. Przy wyborze produktu na dole będzie wyświetlana lista
+> 3. Musimy wybrać klilenta by móc wykonać symulację
+> 4. Gdy będziemy chcieli dodać do ten sam produkt dwa razy wyświetli się nam informacja o tym ze produkt juz istnieje na liście (tutaj będą wprowadzane poprawki by "koszyk" działał w pełni prawidłowo)
+> 5. Gdy któregoś produktu nie ma "na stanie" wtedy nie będzie wyświetlany na liście produktów w symulacji
+
+## Kategorie
+
