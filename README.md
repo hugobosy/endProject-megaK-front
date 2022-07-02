@@ -60,6 +60,11 @@ export const pool = createPool({
 
 Jeżeli masz inne dane, musisz je edytować w ten sposób, aby odpowiadały Twojej bazie!
 
+Teraz w konsoli wystarczy uruchomić back-end oraz front-end
+
+> W terminalu wchodzimy do folderu z back-endem a potem z front-endem i wpisujemy polecenie dla kazdego z nich:
+> > npm start
+
 Zrobione! :smiley:
 
 # Wykorzystane technologie / paczki / jezyki programowania
