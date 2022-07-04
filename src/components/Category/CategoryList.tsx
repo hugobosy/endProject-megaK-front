@@ -37,7 +37,7 @@ export const CategoryList = (props: Props) => {
 
     return (
         <div>
-            <div>
+            <div className="Category__sort">
                 <label>Sortuj: </label>
                 <select value={select} onChange={sortCategory}>
                     <option value="-">-</option>
