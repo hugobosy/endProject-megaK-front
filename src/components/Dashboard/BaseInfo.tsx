@@ -51,7 +51,6 @@ export const BaseInfo = (props: Props) => {
                     <p>{props.users.length}</p>
                     <p>Najnowszy klient: {props.users.length ? lastUser[0] : 'Brak'}</p>
                 </div>
-                {/*todo tutaj wczytywanie danych z bazy */}
             </div>
         </div>
     )
