@@ -1,7 +1,6 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import './Products.css';
 import {ProductList} from "../../components/Products/ProductList";
-import {ProductSort} from "../../components/Products/ProductSort";
 import {SearchProduct} from "../../components/Products/SearchProduct";
 import {Product} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
@@ -21,7 +20,8 @@ export const Products = () => {
         active: false,
         id: '',
     })
-    const [sort, setSort] = useState('-')
+    const [search, setSearch] = useState<Product[]>([])
+
 
     const getProducts = async () => {
         const res = await fetch('http://localhost:3001/products');
@@ -83,7 +83,9 @@ export const Products = () => {
         setOrderProduct({...orderProduct, active: true, id: e.currentTarget.id});
     }
 
-
+    const handleSearch = (e: string) => {
+        setSearch([...product].filter(product => product.firm.includes(e) || product.model.includes(e) || product.category.includes(e)).map(product => product))
+    }
 
     return (
         <div className="page">
@@ -91,17 +93,15 @@ export const Products = () => {
             <div className="Products__header">
                 <h1>Produkty</h1>
                 <button onClick={handleClickButtonAddProduct}>Dodaj produkt</button>
-                <SearchProduct/>
+                <SearchProduct handleSearch={handleSearch}/>
             </div>
-
-            <ProductSort handleSort={setSort} sort={sort}/>
 
             <ProductList
                 products={product}
-                sort={sort}
                 delete={handleDelete}
                 edit={handleEdit}
                 orderNow={orderNow}
+                search={search}
             />
 
             <Notification msg={mess} succ={success}/>

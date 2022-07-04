@@ -24,12 +24,11 @@ export const Clients = () => {
     }
 
     async function getClients(): Promise<void> {
-        await fetch('http://localhost:3001/clients')
-            .then(res => res.json())
-            .then(data => setClients(data))
+        const res = await fetch('http://localhost:3001/clients')
+        const data = await res.json();
+        setClients(await data)
     }
 
-    //todo usun then bo jest await
     const deleteClient = async (item: string) => {
         try {
             await fetch(`http://localhost:3001/clients/delete/${item}`, {

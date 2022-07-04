@@ -46,7 +46,6 @@ export const Category = () => {
         } catch (e) {
             console.log('Error', e)
         }
-    //    todo przypisywanie uuid aby automatycznie było w id kategorii lub moze przeladowanie strony ?
     }
 
     const handleSubmit = (e: SyntheticEvent) => {
@@ -76,6 +75,9 @@ export const Category = () => {
                 name: '',
                 image: ''
             })
+            setTimeout(()=> {
+                window.location.reload()
+            }, 3000)
         }
     }
 
@@ -119,5 +121,3 @@ export const Category = () => {
         </div>
     )
 }
-
-// todo zrób przeładowanie strony po dodaniu kategorii

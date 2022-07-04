@@ -13,7 +13,7 @@ const size:number = 32
 
 export const menuLinks:Links[] = [
     {
-        link: 'dashboard',
+        link: '',
         name: 'Dashboard',
         icon: <Dashboard size={size} className='Menu__icon'/>,
     },
