@@ -43,8 +43,6 @@ export const ProductList = (props: Props) => {
             setSorted([])
         }
     }
-
-    console.log(sorted)
     return (
         <>
             <ProductSort handleSort={handleSort}/>
