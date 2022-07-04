@@ -20,6 +20,7 @@ export const Products = () => {
         active: false,
         id: '',
     })
+    const [search, setSearch] = useState<Product[]>([])
 
 
     const getProducts = async () => {
@@ -82,7 +83,9 @@ export const Products = () => {
         setOrderProduct({...orderProduct, active: true, id: e.currentTarget.id});
     }
 
-
+    const handleSearch = (e: string) => {
+        setSearch([...product].filter(product => product.firm.includes(e) || product.model.includes(e) || product.category.includes(e)).map(product => product))
+    }
 
     return (
         <div className="page">
@@ -90,7 +93,7 @@ export const Products = () => {
             <div className="Products__header">
                 <h1>Produkty</h1>
                 <button onClick={handleClickButtonAddProduct}>Dodaj produkt</button>
-                <SearchProduct/>
+                <SearchProduct handleSearch={handleSearch}/>
             </div>
 
             <ProductList
@@ -98,6 +101,7 @@ export const Products = () => {
                 delete={handleDelete}
                 edit={handleEdit}
                 orderNow={orderNow}
+                search={search}
             />
 
             <Notification msg={mess} succ={success}/>
