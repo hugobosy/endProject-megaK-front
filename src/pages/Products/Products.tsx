@@ -8,6 +8,8 @@ import {AddProduct} from "../../components/Products/AddProduct";
 import {EditProduct} from "../../components/Products/EditProduct";
 import {OrderNow} from "../../components/Products/OrderNow";
 
+
+
 export const Products = () => {
 
     const [product, setProduct] = useState<Product[]>([]);
@@ -58,19 +60,20 @@ export const Products = () => {
     }
 
     const handleDelete = (e: SyntheticEvent) => {
-
         const delItem = e.currentTarget.id;
         //@ts-ignore
         const nameDelItem = e.currentTarget.dataset.name
-        deleteProduct(delItem)
+        if(window.confirm(`Czy jesteś pewien, ze chcesz usunąć ${nameDelItem}`)) {
+            deleteProduct(delItem)
+            setMess(`Usunięto produkt ${nameDelItem} z bazy`)
+            setSuccess(false)
+            const newData = [...product].filter(item => item.id !== delItem);
+            setProduct(newData);
+            closeNotification()
+        } else {
+            return
+        }
 
-        setMess(`Usunięto produkt ${nameDelItem} z bazy`)
-        setSuccess(false)
-
-        const newData = [...product].filter(item => item.id !== delItem);
-
-        setProduct(newData);
-        closeNotification()
     }
     // todo przy błedach usuwania itp postaraj się wyświetlać belkę z informacją
 

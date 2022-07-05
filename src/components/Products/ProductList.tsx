@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, SyntheticEvent, useEffect, useState} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {Product} from "types";
 import {ProductSort} from "./ProductSort";
 
@@ -75,7 +75,6 @@ export const ProductList = (props: Props) => {
                                     {product.quantity ? null :
                                         <button onClick={props.orderNow} id={product.id}>Zamów</button>}
                                 </div>
-                                {/*    todo dodaj potierdzenia do usunięcia produktu*/}
                             </div>
                         </div>
                     ))
@@ -106,7 +105,6 @@ export const ProductList = (props: Props) => {
                                         {product.quantity ? null :
                                             <button onClick={props.orderNow} id={product.id}>Zamów</button>}
                                     </div>
-                                    {/*    todo dodaj potierdzenia do usunięcia produktu*/}
                                 </div>
                             </div>
                         ))
@@ -136,7 +134,6 @@ export const ProductList = (props: Props) => {
                                         {product.quantity ? null :
                                             <button onClick={props.orderNow} id={product.id}>Zamów</button>}
                                     </div>
-                                    {/*    todo dodaj potierdzenia do usunięcia produktu*/}
                                 </div>
                             </div>
                         ))}
