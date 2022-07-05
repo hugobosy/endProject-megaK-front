@@ -20,8 +20,6 @@ export const Orders = () => {
     const sumPrice = orders.map(order => order.total).reduce((prev, curr) => prev + curr, 0)
     const sumCount = orders.map(order => order.count).reduce((prev, curr) => prev + curr, 0)
 
-    // const date = orders.map(order => new Date(order.date).getTime()).sort((a,b) => b - a);
-
     const handleSimulator = () => {
         setSimulator(true);
     }

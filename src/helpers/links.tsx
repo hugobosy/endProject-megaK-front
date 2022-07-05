@@ -9,7 +9,7 @@ interface Links {
     icon: ReactElement,
 }
 
-const size:number = 32
+const size:number = 30
 
 export const menuLinks:Links[] = [
     {

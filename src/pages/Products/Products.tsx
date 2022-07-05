@@ -8,6 +8,8 @@ import {AddProduct} from "../../components/Products/AddProduct";
 import {EditProduct} from "../../components/Products/EditProduct";
 import {OrderNow} from "../../components/Products/OrderNow";
 
+
+
 export const Products = () => {
 
     const [product, setProduct] = useState<Product[]>([]);

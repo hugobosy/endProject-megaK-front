@@ -5,8 +5,6 @@ interface Props {
 }
 
 export const SearchProduct = (props: Props) => {
-
-
     return (
         <form>
             <input type="search" className="SearchForm SearchProduct" placeholder="Znajdź produkt..." onChange={e => props.handleSearch(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}/>

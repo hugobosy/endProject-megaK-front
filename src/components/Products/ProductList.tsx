@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, SyntheticEvent, useEffect, useState} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {Product} from "types";
 import {ProductSort} from "./ProductSort";
 
