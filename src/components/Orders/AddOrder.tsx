@@ -50,7 +50,6 @@ export const AddOrder = (props: Props) => {
         getProduct()
     }, [])
 
-
     const addToBasket = (e: SyntheticEvent) => {
         e.preventDefault();
 
@@ -86,9 +85,16 @@ export const AddOrder = (props: Props) => {
 
     const handleBuy = (e: SyntheticEvent) => {
         e.preventDefault()
-        buy();
-        setTimeout(() => props.close, 1000)
 
+        if(data.products && data.client) {
+            buy();
+            setTimeout(() => {
+                props.close(false);
+                window.location.reload();
+            }, 1000)
+        } else {
+            alert('Musisz wybrać produkt i klienta!')
+        }
     }
 
     return (
@@ -130,7 +136,9 @@ export const AddOrder = (props: Props) => {
                     <p>{data.total}</p>
                 </div>
 
-                <button onClick={handleBuy}>Symuluj zakupy</button>
+                <button onClick={() => setData({...data, payment: true})}>Zapłać</button>
+
+                <p><button onClick={handleBuy}>Symuluj zakupy</button></p>
             </div>
         </div>
     )

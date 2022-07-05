@@ -100,17 +100,19 @@ export const Category = () => {
         const delItem = e.currentTarget.parentNode.parentNode.parentNode.id;
         // @ts-ignore
         const nameDelItem = e.currentTarget.parentNode.parentNode.parentNode.dataset.name;
-        console.log(delItem)
-        deleteData(delItem)
-        // @ts-ignore
-        setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
-        setSuccess(false)
-        // @ts-ignore
-        const newData = [...data].filter(item=> item.id !== delItem);
-        console.log(newData)
-        // @ts-ignore
-        setData(newData);
-        closeNotification()
+
+        if(window.confirm(`Czy na pewno chcesz usunąć kategorię ${nameDelItem} ?`)) {
+            deleteData(delItem)
+            setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
+            setSuccess(false)
+            // @ts-ignore
+            const newData = [...data].filter(item=> item.id !== delItem);
+            setData(newData);
+            closeNotification()
+        } else {
+            return
+        }
+
     }
 
     return (

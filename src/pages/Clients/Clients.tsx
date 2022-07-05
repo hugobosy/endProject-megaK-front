@@ -62,13 +62,19 @@ export const Clients = () => {
         const delItem = e.currentTarget.parentNode.parentNode.id
         // @ts-ignore
         const delName = e.currentTarget.parentNode.parentNode.dataset.name
-        deleteClient(delItem);
-        setMess(`Klient ${delName} został usunięty`)
-        setSuccess(false)
-        // @ts-ignore
-        const newList = clients.filter(client => client.id !== delItem)
-        setClients(newList)
-        closeNotification()
+
+        if(window.confirm(`Czy na pewno chcesz usunąć uzytkownika ${delName} ?`)) {
+            deleteClient(delItem);
+            setMess(`Klient ${delName} został usunięty`)
+            setSuccess(false)
+            // @ts-ignore
+            const newList = clients.filter(client => client.id !== delItem)
+            setClients(newList)
+            closeNotification()
+        } else {
+            return
+        }
+
     }
 
     const handleBan = (e: SyntheticEvent) => {
@@ -76,12 +82,18 @@ export const Clients = () => {
         const banItem = e.currentTarget.parentNode.parentNode.id
         // @ts-ignore
         const banName = e.currentTarget.parentNode.parentNode.dataset.name
-        setMess(`Klient ${banName} został zbanowany`)
-        setSuccess(false)
-        banClient(banItem)
-        // @ts-ignore
-        e.currentTarget.parentNode.parentNode.classList.add('banned')
-        closeNotification()
+
+        if(window.confirm(`Czy na pewno chcesz zablokować uzytkownika ${banName} ?`)) {
+            setMess(`Klient ${banName} został zbanowany`)
+            setSuccess(false)
+            banClient(banItem)
+            // @ts-ignore
+            e.currentTarget.parentNode.parentNode.classList.add('banned')
+            closeNotification()
+        } else {
+            return
+        }
+
     }
 
     const handleAddClient = () => {

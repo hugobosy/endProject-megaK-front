@@ -137,5 +137,3 @@ export const AddProduct = (props: Props) => {
     )
 
 }
-
-// todo dodaj placeholders do input
