@@ -42,7 +42,7 @@ export const ClientsList = (props: Props) => {
                         <p>{client.address}<br/>{client.code} {client.city}</p>
                         <p>{client.phone}</p>
                         <p>{client.gender}</p>
-                        <p>{client.birth.slice(0, 10)}</p>
+                        <p>{client.birth}</p>
                         <p>{client.email}</p>
                         <p><Trash size="25" color="red"
                                   style={{cursor: 'pointer'}} className="bx-trash-alt" onClick={props.clickDel}/><Hand

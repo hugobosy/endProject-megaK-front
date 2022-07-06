@@ -15,6 +15,12 @@ export const Clients = () => {
     const [search, setSearch] = useState<ClientType[]>([]);
 
 
+    const sorted = [...clients].sort((a,b) => {
+        if(a.birth < b.birth) return 1
+        if(a.birth > b.birth) return -1
+        return 0
+    })
+
     useEffect(() => {
         getClients();
     }, []);
@@ -27,8 +33,8 @@ export const Clients = () => {
 
     async function getClients(): Promise<void> {
         const res = await fetch('http://localhost:3001/clients')
-        const data = await res.json();
-        setClients(await data)
+        const data: ClientType[] = await res.json();
+        setClients(data)
     }
 
     const handleSearch = (e: string) => {
@@ -118,12 +124,10 @@ export const Clients = () => {
             </div>
             <div className="Clients">
                 <ClientListHeader/>
-                <ClientsList listClient={clients} clickDel={handleDelete} clickBan={handleBan} search={search}/>
+                <ClientsList listClient={sorted} clickDel={handleDelete} clickBan={handleBan} search={search}/>
             </div>
             <Notification msg={mess} succ={success}/>
             {addClient ? <AddClient adClient={addClient} setClient={setAddClient}/> : null}
         </div>
     )
 }
-
-// todo dodaj edycję klienta
