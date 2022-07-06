@@ -8,6 +8,7 @@ export const Orders = () => {
 
     const [orders, setOrders] = useState<Order[]>([]);
     const [simulator, setSimulator] = useState(false);
+    const [search, setSearch] = useState<Order[]>([]);
 
     useEffect(() => {
         (async () => {
@@ -24,7 +25,9 @@ export const Orders = () => {
         setSimulator(true);
     }
 
-    console.log(orders)
+    const handleSearch = (e: string) => {
+        setSearch([...orders].filter(order => order.client.includes(e) || order.id.includes(e) || order.products.includes(e)).map(order => order))
+    }
 
     return (
         <div className="page">
@@ -37,7 +40,7 @@ export const Orders = () => {
                     <p>Sprzedanych produktów: <span>{sumCount}</span></p>
                 </div>
             </div>
-            <OrdersList orders={orders}/>
+            <OrdersList orders={orders} handleSearch={handleSearch} search={search}/>
             {simulator ? <AddOrder close={setSimulator}/> : null}
         </div>
     )
