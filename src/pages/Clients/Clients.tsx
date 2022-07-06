@@ -4,13 +4,15 @@ import {ClientsList} from "../../components/Clients/ClientsList";
 import {ClientListHeader} from "../../components/Clients/ClientListHeader";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddClient} from "../../components/Clients/AddClient";
+import {ClientType} from "types";
 
 export const Clients = () => {
 
-    const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState<ClientType[]>([]);
     const [success, setSuccess] = useState<boolean | null>(null);
     const [mess, setMess] = useState<string>('');
     const [addClient, setAddClient] = useState<boolean>(false)
+    const [search, setSearch] = useState<ClientType[]>([]);
 
 
     useEffect(() => {
@@ -27,6 +29,10 @@ export const Clients = () => {
         const res = await fetch('http://localhost:3001/clients')
         const data = await res.json();
         setClients(await data)
+    }
+
+    const handleSearch = (e: string) => {
+        setSearch([...clients].filter(client => client.name.includes(e) || client.surname.includes(e) || client.email.includes(e)).map(order => order))
     }
 
     const deleteClient = async (item: string) => {
@@ -107,9 +113,12 @@ export const Clients = () => {
                 <h1>Klienci</h1>
                 <button onClick={handleAddClient}>Dodaj nowego klienta</button>
             </div>
+            <div>
+                <input type="search" placeholder='Wyszukaj uzytkownika' onChange={e => handleSearch(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}/>
+            </div>
             <div className="Clients">
                 <ClientListHeader/>
-                <ClientsList listClient={clients} clickDel={handleDelete} clickBan={handleBan}/>
+                <ClientsList listClient={clients} clickDel={handleDelete} clickBan={handleBan} search={search}/>
             </div>
             <Notification msg={mess} succ={success}/>
             {addClient ? <AddClient adClient={addClient} setClient={setAddClient}/> : null}
