@@ -2,40 +2,35 @@ import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} fr
 import {ClientType, Product} from "types";
 import {v4 as uuid} from 'uuid';
 
-// interface Data {
-//     date: string,
-//     id: string,
-//     products: string,
-//     client: string,
-//     count: number,
-//     total: number,
-//     payment: boolean,
-//     buy: { id: string, count: number }[]
-// }
-//
 interface Props {
     close: Dispatch<SetStateAction<boolean>>;
+}
+
+interface Data {
+    id: string,
+    date: string,
+    payment: number,
+    client: string
 }
 
 export const AddOrder = (props: Props) => {
 
     const [client, setClient] = useState<ClientType[]>([]);
     const [product, setProduct] = useState<Product[]>([]);
-    const [cart, setCart] = useState<Product[]>([])
+    const [cart, setCart] = useState<Product[]>([]);
 
-    // const [data, setData] = useState<Data>({
-    //     date: new Date().toLocaleString(),
-    //     id: uuid(),
-    //     products: '',
-    //     client: '',
-    //     count: 0,
-    //     total: 0,
-    //     payment: false,
-    //     buy: [],
-    // })
+    const itemsPrice = cart.reduce((prev, curr) => prev + curr.price * curr.quantity, 0);
+    const taxPrice = 23 / 123 * itemsPrice;
+
+    const [data, setData] = useState<Data>({
+        id: uuid(),
+        date: new Date().toLocaleString(),
+        payment: 0,
+        client: ''
+    })
 
     const getClient = async () => {
-        const res = await fetch(`http://localhost:3001/clients`);
+        const res = await fetch(`http://localhost:3001/clients`)
         const data = await res.json();
         setClient(await data)
     }
@@ -70,32 +65,40 @@ export const AddOrder = (props: Props) => {
         }
     }
 
-    const itemsPrice = cart.reduce((prev, curr) => prev + curr.price * curr.quantity, 0);
-    const taxPrice = 23 / 123 * itemsPrice;
+    const dataBase = [{
+        id: data.id,
+        date: data.date,
+        total: itemsPrice,
+        payment: data.payment,
+        products: cart.map(item => `${item.firm} ${item.model}`).toString(),
+        productID: cart.map(item => ({id: item.id, count: item.quantity})),
+        quantity: cart.map(item => item.quantity).reduce((prev,curr) => prev + curr, 0),
+        client: data.client
+    }]
 
     const buy = async () => {
-        // await fetch('http://localhost:3001/orders/simulate', {
-        //     method: 'POST',
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // });
+        await fetch('http://localhost:3001/orders/simulate', {
+            method: 'POST',
+            body: JSON.stringify(dataBase),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
     }
 
     const handleBuy = (e: SyntheticEvent) => {
-        // e.preventDefault()
-        //
-        // if(data.products && data.client) {
-        //     buy();
-        //     setTimeout(() => {
-        //         props.close(false);
-        //         window.location.reload();
-        //     }, 1000)
-        // } else {
-        //     alert('Musisz wybrać produkt i klienta!')
-        // }
+        e.preventDefault()
+
+        if(cart && data.client) {
+            buy();
+            setTimeout(() => {
+                props.close(false);
+                window.location.reload();
+            }, 3000)
+        } else {
+            alert('Musisz wybrać produkt i klienta!')
+        }
 
 
     }
@@ -115,9 +118,7 @@ export const AddOrder = (props: Props) => {
 
                 <fieldset>
                     <legend>Wybierz klienta</legend>
-
-
-                    <select>
+                    <select onChange={e => setData({...data, client: e.target.value})}>
                         <option value="-">-</option>
                         {client.map(client =>
                             <>
@@ -131,13 +132,14 @@ export const AddOrder = (props: Props) => {
 
                 <div className="Orders__basket">
                     Koszyk
-                    <div>{cart.length === 0 && <div>Koszyj jest pusty</div>}</div>
+                    <hr/>
+                    <div>{cart.length === 0 && <div>Koszyk jest pusty</div>}</div>
                     {cart.map(item =>
                         <div key={item.id} className="Orders__basket-item">
                             <div>{item.firm} {item.model}</div>
                             <div>
-                                <button onClick={()=>addToBasket(item)}>+</button>
-                                <button onClick={()=>removeFromBasket(item)}>-</button>
+                                <button className="Order__basket-button" onClick={()=>addToBasket(item)}>+</button>
+                                <button className="Order__basket-button" onClick={()=>removeFromBasket(item)}>-</button>
                             </div>
                             <div>
                                 {item.quantity} x {item.price.toFixed(2)}
@@ -157,9 +159,9 @@ export const AddOrder = (props: Props) => {
                         </>
                     )}
 
-                    {/*    <button onClick={() => setData({...data, payment: true})}>Zapłać</button>*/}
+                        <button onClick={() => setData({...data, payment: 1})}>Zapłać</button>
 
-                    {/*    <p><button onClick={handleBuy}>Symuluj zakupy</button></p>*/}
+                        <p><button onClick={handleBuy}>Symuluj zakupy</button></p>
                 </div>
 
 
