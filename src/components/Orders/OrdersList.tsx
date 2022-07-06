@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
-import {Order} from "types";
+import React, {SyntheticEvent, useState} from 'react';
+import {Order, Product} from "types";
 
 interface Props {
     orders: Order[],
+    handleSearch: (e: string) => void,
+    search: Order[]
 }
 
 export const OrdersList = (props: Props) => {
@@ -45,6 +47,7 @@ export const OrdersList = (props: Props) => {
                     <option value="price">po cenie</option>
                     <option value="payment">po płatności</option>
                 </select>
+                <input type="search" placeholder="Szukaj zamówienia" onChange={e => props.handleSearch(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}/>
             </div>
             <div className="Orders">
                 <h2>Lista zamówień</h2>
@@ -58,7 +61,21 @@ export const OrdersList = (props: Props) => {
                         <p>Łączna cena</p>
                         <p>Płatność</p>
                     </div>
-                    {sortList.length ? sortList.map(order => (
+                    {props.search.length ? props.search.map(order => (
+                        <div className="Orders__content" key={order.id}>
+                            <p>{order.date}</p>
+                            <p>{order.id}</p>
+                            <div>
+                                {order.products.split(', ').map(item => <p key={item}>{item}</p>)}
+                            </div>
+                            <div>
+                                {order.client.split(', ').map(cli => <p key={cli}>{cli}</p>)}
+                            </div>
+                            <p>{order.count}</p>
+                            <p>{order.total}</p>
+                            <p>{order.payment ? 'Zakończona' : 'W trakcie'}</p>
+                        </div>
+                    )): sortList.length ? sortList.map(order => (
                         <div className="Orders__content" key={order.id}>
                             <p>{order.date}</p>
                             <p>{order.id}</p>
