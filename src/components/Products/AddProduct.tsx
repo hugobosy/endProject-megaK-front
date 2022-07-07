@@ -22,7 +22,6 @@ export const AddProduct = (props: Props) => {
     })
 
     const [category, setCategory] = useState<AdCategory[]>([]);
-    const [accept, setAccept] = useState<boolean>(false)
     const [succ, setSucc] = useState<boolean | null>(null)
     const [msg, setMsg] = useState<string>('')
 
@@ -36,25 +35,10 @@ export const AddProduct = (props: Props) => {
         addItem(data, 'http://localhost:3001/products/add');
         setSucc(true);
         setMsg(`Dodano produkt ${data.firm} ${data.model} do bazy`)
-        closeNotification(setSucc)
-        setAccept(true)
-        setData({
-            id: '',
-            firm: '',
-            model: '',
-            category: '-',
-            price: 0,
-            quantity: 0,
-            description: '',
-            picture: '',
-        })
-    }
-
-    if (accept) {
-        setTimeout(() => {
-            props.close(false)
+        closeNotification(setSucc);
+        setTimeout(()=>{
             window.location.reload()
-        }, 3400)
+        }, 2000)
     }
 
     return (
