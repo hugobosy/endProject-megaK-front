@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useState} from "react";
 import {Product} from "types";
 import {Notification} from "../common/Notification/Notification";
+import {closeNotification} from "../../helpers/functions";
 
 interface Props {
     product: Product[]
@@ -19,12 +20,6 @@ export const OrderNow = (props: Props) => {
     const [msg, setMsg] = useState<string>('')
     const [accept, setAccept] = useState<boolean>(false)
 
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSucc(null)
-        }, 1500)
-    }
-
     const orderNow = async() => {
         await fetch(`http://localhost:3001/products/order`, {
             method: 'PATCH',
@@ -40,7 +35,7 @@ export const OrderNow = (props: Props) => {
         orderNow();
         setSucc(true);
         setMsg(`Zamówiłeś ${order.count} sztuk produktu ${item.map(item => `${item.firm} ${item.model}`)}`);
-        closeNotification();
+        closeNotification(setSucc);
         setAccept(true)
     }
 

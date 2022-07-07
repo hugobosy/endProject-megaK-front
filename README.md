@@ -127,8 +127,7 @@ Zrobione! :smiley:
 > 1. Po kliknięciu Symuluj zamówienie wyskoczy okienko z listą produktów z wyborem klienta i zatwierdzenia symulacji
 > 2. Przy wyborze produktu na dole będzie wyświetlana lista
 > 3. Musimy wybrać klilenta by móc wykonać symulację
-> 4. Gdy będziemy chcieli dodać do ten sam produkt dwa razy wyświetli się nam informacja o tym ze produkt juz istnieje na liście (tutaj będą wprowadzane poprawki by "koszyk" działał w pełni prawidłowo)
-> 5. Gdy któregoś produktu nie ma "na stanie" wtedy nie będzie wyświetlany na liście produktów w symulacji
+> 4. Gdy któregoś produktu nie ma "na stanie" wtedy nie będzie wyświetlany na liście produktów w symulacji
 
 ## Kategorie
 

@@ -2,6 +2,7 @@ import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} fr
 import {v4 as uuid} from 'uuid';
 import {AdCategory, Product} from "types";
 import {Notification} from "../common/Notification/Notification";
+import {addItem, closeNotification, getItems} from "../../helpers/functions";
 
 interface Props {
     close: Dispatch<SetStateAction<boolean>>
@@ -21,61 +22,23 @@ export const AddProduct = (props: Props) => {
     })
 
     const [category, setCategory] = useState<AdCategory[]>([]);
-    const [accept, setAccept] = useState<boolean>(false)
     const [succ, setSucc] = useState<boolean | null>(null)
     const [msg, setMsg] = useState<string>('')
 
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSucc(null)
-        }, 3000)
-    }
-
-    const getCategory = async () => {
-        const res = await fetch('http://localhost:3001/category');
-        const data = await res.json()
-        setCategory(await data);
-    }
-
     useEffect(() => {
-        getCategory();
+        getItems('http://localhost:3001/category', setCategory);
     }, [])
-
-    const addProduct = async () => {
-        await fetch('http://localhost:3001/products/add', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                "Content-type": "application/json",
-            },
-        });
-    }
 
     const handleAddSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
 
-        addProduct();
+        addItem(data, 'http://localhost:3001/products/add');
         setSucc(true);
         setMsg(`Dodano produkt ${data.firm} ${data.model} do bazy`)
-        closeNotification()
-        setAccept(true)
-        setData({
-            id: '',
-            firm: '',
-            model: '',
-            category: '-',
-            price: 0,
-            quantity: 0,
-            description: '',
-            picture: '',
-        })
-    }
-
-    if (accept) {
-        setTimeout(() => {
-            props.close(false)
+        closeNotification(setSucc);
+        setTimeout(()=>{
             window.location.reload()
-        }, 3400)
+        }, 2000)
     }
 
     return (

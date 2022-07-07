@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
 import {AdCategory, Product} from "types";
 import {Notification} from "../common/Notification/Notification";
+import {closeNotification, getItems} from "../../helpers/functions";
 
 interface Props {
     id: string;
@@ -24,21 +25,9 @@ export const EditProduct = (props: Props) => {
         picture: '',
     })
 
-    const getCategory = async () => {
-        const res = await fetch('http://localhost:3001/category');
-        const data = await res.json()
-        setCategory(await data);
-    }
-
-    const getOne = async (id: string) => {
-        const res = await fetch(`http://localhost:3001/products/${id}`);
-        const data = res.json();
-        setProductOne(await data);
-    }
-
     useEffect(() => {
-        getOne(props.id)
-        getCategory();
+        getItems(`http://localhost:3001/products/${id}`, setProductOne)
+        getItems('http://localhost:3001/category', setCategory);
         setData({...data, id: props.id})
     }, [])
 
@@ -56,11 +45,20 @@ export const EditProduct = (props: Props) => {
 
     const handleEditSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
-        handleEdit()
-
+        if(!data.firm || !data.model || !data.category || !data.price || !data.quantity || !data.description || !data.picture){
+            setMsg(`Wszystkie pola muszą być wypełnione!`);
+            setSucc(false)
+            closeNotification(setSucc)
+        } else {
+            setMsg(`Produkt został edytowany`);
+            setSucc(true)
+            handleEdit()
+            closeNotification(setSucc)
+            setTimeout(() => {
+                window.location.reload()
+            }, 3400)
+        }
     }
-
-    console.log(data)
 
     return (
         <div className="Products__add">

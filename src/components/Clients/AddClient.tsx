@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useState} from "react";
 import {v4 as uuid} from 'uuid';
 import {Notification} from "../common/Notification/Notification";
+import {addItem, closeNotification} from "../../helpers/functions";
 
 interface Props {
     adClient: boolean,
@@ -26,23 +27,6 @@ export const AddClient = (props: Props) => {
     const [msg, setMsg] = useState<string>('')
     const [accept, setAccept] = useState<boolean>(false);
 
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSucc(null)
-        }, 3000)
-    }
-
-    const addClient = async () => {
-        await fetch('http://localhost:3001/clients/add', {
-            method: 'POST',
-            body: JSON.stringify(addForm),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
-
-    }
-
     const handleSubmitAddClient = (e: SyntheticEvent) => {
         e.preventDefault();
         if (!addForm.id) {
@@ -55,25 +39,25 @@ export const AddClient = (props: Props) => {
         if (!addForm.name || addForm.name.length < 3 || addForm.name.length > 36 || !/^[A-Za-z]+$/.test(addForm.name)) {
             setSucc(false)
             setMsg('Imię powinno mieć minimum 3 znaki oraz maks 36 znaków bez liczb')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (!addForm.surname || addForm.surname.length < 2 || addForm.surname.length > 96 || !/^[A-Za-z]/.test(addForm.surname)) {
             setSucc(false)
             setMsg('Nazwisko powinno mieć minimum 2 znaki oraz maks 96 znaków bez liczb')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (!addForm.address || addForm.address.length < 5 || addForm.address.length > 150) {
             setSucc(false)
             setMsg('Adres powinno mieć minimum 5 znaków oraz maks 150 znaków')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (!/^[0-9]{2}-[0-9]{3}$/.test(addForm.code)) {
             setSucc(false)
             setMsg('Nieprawidłowy format kodu pocztowego')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (!addForm.city || addForm.city.length < 3 || addForm.city.length > 70 || !/^[A-Za-z]/.test(addForm.city)) {
@@ -84,28 +68,28 @@ export const AddClient = (props: Props) => {
         if (!addForm.phone || String(addForm.phone).length !== 9 || !/^[0-9]/.test(String(addForm.phone))) {
             setSucc(false)
             setMsg('Numer tel (pol) składa się z 9 cyfr !')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (addForm.gender === '-') {
             setSucc(false)
             setMsg('Musisz podac jedną z płci')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
         if (!addForm.email || !/\S+@\S+\.\S+/.test(addForm.email)) {
             setSucc(false)
             setMsg('Nieprawidłowy e-mail')
-            closeNotification()
+            closeNotification(setSucc)
             return
         }
 
         if(addForm.name && addForm.surname && addForm.address && addForm.code && addForm.city && addForm.phone && addForm.gender && addForm.email) {
-            addClient();
+            addItem(addForm, 'http://localhost:3001/clients/add');
 
             setSucc(true);
             setMsg('Dodano klienta do bazy')
-            closeNotification()
+            closeNotification(setSucc)
             setAccept(true)
         }
     }

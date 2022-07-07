@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
 import {ClientType, Product} from "types";
 import {v4 as uuid} from 'uuid';
+import {addItem, getItems} from "../../helpers/functions";
 
 interface Props {
     close: Dispatch<SetStateAction<boolean>>;
@@ -29,21 +30,9 @@ export const AddOrder = (props: Props) => {
         client: ''
     })
 
-    const getClient = async () => {
-        const res = await fetch(`http://localhost:3001/clients`)
-        const data = await res.json();
-        setClient(await data)
-    }
-
-    const getProduct = async () => {
-        const res = await fetch('http://localhost:3001/products');
-        const data = await res.json();
-        setProduct(await data)
-    }
-
     useEffect(() => {
-        getClient()
-        getProduct()
+        getItems(`http://localhost:3001/clients`, setClient)
+        getItems('http://localhost:3001/products', setProduct)
     }, [])
 
     const addToBasket = (product: Product) => {
@@ -76,22 +65,11 @@ export const AddOrder = (props: Props) => {
         client: data.client
     }]
 
-    const buy = async () => {
-        await fetch('http://localhost:3001/orders/simulate', {
-            method: 'POST',
-            body: JSON.stringify(dataBase),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-    }
-
     const handleBuy = (e: SyntheticEvent) => {
         e.preventDefault()
 
         if(cart && data.client) {
-            buy();
+            addItem(dataBase, 'http://localhost:3001/orders/simulate');
             setTimeout(() => {
                 props.close(false);
                 window.location.reload();
@@ -99,8 +77,6 @@ export const AddOrder = (props: Props) => {
         } else {
             alert('Musisz wybrać produkt i klienta!')
         }
-
-
     }
 
     return (

@@ -5,6 +5,7 @@ import {ClientListHeader} from "../../components/Clients/ClientListHeader";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddClient} from "../../components/Clients/AddClient";
 import {ClientType} from "types";
+import {closeNotification, deleteItem, getItems} from "../../helpers/functions";
 
 export const Clients = () => {
 
@@ -22,37 +23,11 @@ export const Clients = () => {
     })
 
     useEffect(() => {
-        getClients();
+        getItems('http://localhost:3001/clients', setClients);
     }, []);
-
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSuccess(null)
-        }, 3000)
-    }
-
-    async function getClients(): Promise<void> {
-        const res = await fetch('http://localhost:3001/clients')
-        const data: ClientType[] = await res.json();
-        setClients(data)
-    }
 
     const handleSearch = (e: string) => {
         setSearch([...clients].filter(client => client.name.includes(e) || client.surname.includes(e) || client.email.includes(e)).map(order => order))
-    }
-
-    const deleteClient = async (item: string) => {
-        try {
-            await fetch(`http://localhost:3001/clients/delete/${item}`, {
-                method: 'POST',
-                body: JSON.stringify({item}),
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            })
-        } catch (e) {
-            console.log('Error', e)
-        }
     }
 
     const banClient = async (item: string) => {
@@ -76,13 +51,13 @@ export const Clients = () => {
         const delName = e.currentTarget.parentNode.parentNode.dataset.name
 
         if(window.confirm(`Czy na pewno chcesz usunąć uzytkownika ${delName} ?`)) {
-            deleteClient(delItem);
+            deleteItem(delItem, 'http://localhost:3001/clients/delete/')
             setMess(`Klient ${delName} został usunięty`)
             setSuccess(false)
             // @ts-ignore
             const newList = clients.filter(client => client.id !== delItem)
             setClients(newList)
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }
@@ -101,7 +76,7 @@ export const Clients = () => {
             banClient(banItem)
             // @ts-ignore
             e.currentTarget.parentNode.parentNode.classList.add('banned')
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }

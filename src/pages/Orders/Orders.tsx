@@ -3,6 +3,7 @@ import './Orders.css';
 import {OrdersList} from "../../components/Orders/OrdersList";
 import {Order} from "types";
 import {AddOrder} from "../../components/Orders/AddOrder";
+import {getItems} from "../../helpers/functions";
 
 export const Orders = () => {
 
@@ -11,11 +12,7 @@ export const Orders = () => {
     const [search, setSearch] = useState<Order[]>([]);
 
     useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:3001/orders');
-            const data = res.json();
-            setOrders(await data);
-        })()
+        getItems('http://localhost:3001/orders', setOrders)
     }, [])
 
     const sumPrice = orders.map(order => order.total).reduce((prev, curr) => prev + curr, 0)
