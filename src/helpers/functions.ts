@@ -11,3 +11,23 @@ export const closeNotification = (setstate: Dispatch<SetStateAction<boolean | nu
         setstate(null)
     }, 1500)
 }
+
+export const deleteItem = async(id: string, link: string) => {
+    await fetch(`${link}${id}`, {
+        method: 'POST',
+        body: JSON.stringify({id}),
+        headers: {
+            'Content-type': 'application/json',
+        },
+    })
+}
+
+export const addItem = async(data: any, link: string) => {
+    await fetch(link, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}

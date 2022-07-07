@@ -4,7 +4,7 @@ import {CategoryList} from "../../components/Category/CategoryList";
 import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
 import {Data} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
-import {closeNotification, getItems} from "../../helpers/functions";
+import {addItem, closeNotification, deleteItem, getItems} from "../../helpers/functions";
 
 export const Category = () => {
 
@@ -23,20 +23,6 @@ export const Category = () => {
         getItems('http://localhost:3001/category', setData);
     }, [])
 
-    const addData = async () => {
-        try {
-            await fetch('http://localhost:3001/category/add', {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-        } catch (e) {
-            console.log('Error', e)
-        }
-    }
-
     const handleSubmit = (e: SyntheticEvent) => {
 
         e.preventDefault();
@@ -53,7 +39,7 @@ export const Category = () => {
             closeNotification(setSuccess)
             return
         } else {
-            addData();
+            addItem(formData, 'http://localhost:3001/category/add');
             setMess('Dodano kategorię do bazy')
             setSuccess(true)
             const newData = [...data, formData];
@@ -70,20 +56,6 @@ export const Category = () => {
         }
     }
 
-    const deleteData = async(item: string) => {
-        try {
-            await fetch(`http://localhost:3001/category/delete/${item}`, {
-                method: 'POST',
-                body: JSON.stringify({item}),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-        } catch (e) {
-            console.log('Błąd usuwania', e)
-        }
-    }
-
     const deleteClick = (e: SyntheticEvent) => {
         // @ts-ignore
         const delItem = e.currentTarget.parentNode.parentNode.parentNode.id;
@@ -91,7 +63,7 @@ export const Category = () => {
         const nameDelItem = e.currentTarget.parentNode.parentNode.parentNode.dataset.name;
 
         if(window.confirm(`Czy na pewno chcesz usunąć kategorię ${nameDelItem} ?`)) {
-            deleteData(delItem)
+            deleteItem(delItem, 'http://localhost:3001/category/delete/')
             setMess(`Usunięto kategorię ${nameDelItem} z bazy`)
             setSuccess(false)
             // @ts-ignore

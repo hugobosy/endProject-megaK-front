@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useState} from "react";
 import {v4 as uuid} from 'uuid';
 import {Notification} from "../common/Notification/Notification";
-import {closeNotification} from "../../helpers/functions";
+import {addItem, closeNotification} from "../../helpers/functions";
 
 interface Props {
     adClient: boolean,
@@ -26,17 +26,6 @@ export const AddClient = (props: Props) => {
     const [succ, setSucc] = useState<boolean | null>(null)
     const [msg, setMsg] = useState<string>('')
     const [accept, setAccept] = useState<boolean>(false);
-
-    const addClient = async () => {
-        await fetch('http://localhost:3001/clients/add', {
-            method: 'POST',
-            body: JSON.stringify(addForm),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
-
-    }
 
     const handleSubmitAddClient = (e: SyntheticEvent) => {
         e.preventDefault();
@@ -96,7 +85,7 @@ export const AddClient = (props: Props) => {
         }
 
         if(addForm.name && addForm.surname && addForm.address && addForm.code && addForm.city && addForm.phone && addForm.gender && addForm.email) {
-            addClient();
+            addItem(addForm, 'http://localhost:3001/clients/add');
 
             setSucc(true);
             setMsg('Dodano klienta do bazy')

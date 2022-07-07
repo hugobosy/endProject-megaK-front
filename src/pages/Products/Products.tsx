@@ -7,7 +7,7 @@ import {Notification} from "../../components/common/Notification/Notification";
 import {AddProduct} from "../../components/Products/AddProduct";
 import {EditProduct} from "../../components/Products/EditProduct";
 import {OrderNow} from "../../components/Products/OrderNow";
-import {getItems, closeNotification} from "../../helpers/functions";
+import {getItems, closeNotification, deleteItem} from "../../helpers/functions";
 
 export const Products = () => {
 
@@ -31,26 +31,12 @@ export const Products = () => {
         setAddActive(true)
     }
 
-    const deleteProduct = async (id: string) => {
-        try {
-            await fetch(`http://localhost:3001/products/delete/${id}`, {
-                method: 'POST',
-                body: JSON.stringify({id}),
-                headers: {
-                    'Content-type': 'application/json'
-                },
-            });
-        } catch (e) {
-            console.log('Bład usuwania', e)
-        }
-    }
-
     const handleDelete = (e: SyntheticEvent) => {
         const delItem = e.currentTarget.id;
         //@ts-ignore
         const nameDelItem = e.currentTarget.dataset.name
         if (window.confirm(`Czy jesteś pewien, ze chcesz usunąć ${nameDelItem}`)) {
-            deleteProduct(delItem)
+            deleteItem(delItem, 'http://localhost:3001/products/delete/')
             setMess(`Usunięto produkt ${nameDelItem} z bazy`)
             setSuccess(false)
             const newData = [...product].filter(item => item.id !== delItem);
@@ -59,7 +45,6 @@ export const Products = () => {
         } else {
             return
         }
-
     }
 
     const handleEdit = (e: SyntheticEvent) => {

@@ -5,7 +5,7 @@ import {ClientListHeader} from "../../components/Clients/ClientListHeader";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddClient} from "../../components/Clients/AddClient";
 import {ClientType} from "types";
-import {closeNotification, getItems} from "../../helpers/functions";
+import {closeNotification, deleteItem, getItems} from "../../helpers/functions";
 
 export const Clients = () => {
 
@@ -30,20 +30,6 @@ export const Clients = () => {
         setSearch([...clients].filter(client => client.name.includes(e) || client.surname.includes(e) || client.email.includes(e)).map(order => order))
     }
 
-    const deleteClient = async (item: string) => {
-        try {
-            await fetch(`http://localhost:3001/clients/delete/${item}`, {
-                method: 'POST',
-                body: JSON.stringify({item}),
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            })
-        } catch (e) {
-            console.log('Error', e)
-        }
-    }
-
     const banClient = async (item: string) => {
         try {
             await fetch(`http://localhost:3001/clients/ban/${item}`, {
@@ -65,7 +51,7 @@ export const Clients = () => {
         const delName = e.currentTarget.parentNode.parentNode.dataset.name
 
         if(window.confirm(`Czy na pewno chcesz usunąć uzytkownika ${delName} ?`)) {
-            deleteClient(delItem);
+            deleteItem(delItem, 'http://localhost:3001/clients/delete/')
             setMess(`Klient ${delName} został usunięty`)
             setSuccess(false)
             // @ts-ignore

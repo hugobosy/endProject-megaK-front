@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react";
 import {ClientType, Product} from "types";
 import {v4 as uuid} from 'uuid';
-import {getItems} from "../../helpers/functions";
+import {addItem, getItems} from "../../helpers/functions";
 
 interface Props {
     close: Dispatch<SetStateAction<boolean>>;
@@ -65,22 +65,11 @@ export const AddOrder = (props: Props) => {
         client: data.client
     }]
 
-    const buy = async () => {
-        await fetch('http://localhost:3001/orders/simulate', {
-            method: 'POST',
-            body: JSON.stringify(dataBase),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-    }
-
     const handleBuy = (e: SyntheticEvent) => {
         e.preventDefault()
 
         if(cart && data.client) {
-            buy();
+            addItem(dataBase, 'http://localhost:3001/orders/simulate');
             setTimeout(() => {
                 props.close(false);
                 window.location.reload();
@@ -88,8 +77,6 @@ export const AddOrder = (props: Props) => {
         } else {
             alert('Musisz wybrać produkt i klienta!')
         }
-
-
     }
 
     return (
