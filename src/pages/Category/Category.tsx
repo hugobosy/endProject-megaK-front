@@ -4,6 +4,7 @@ import {CategoryList} from "../../components/Category/CategoryList";
 import {CategoryAddForm} from "../../components/Category/CategoryAddForm";
 import {Data} from "types";
 import {Notification} from "../../components/common/Notification/Notification";
+import {closeNotification, getItems} from "../../helpers/functions";
 
 export const Category = () => {
 
@@ -19,21 +20,9 @@ export const Category = () => {
     const [success, setSuccess] = useState<boolean | null>(null)
 
     useEffect(() => {
-        getData();
+        getItems('http://localhost:3001/category', setData);
     }, [])
 
-    async function getData(): Promise<void> {
-        await fetch('http://localhost:3001/category')
-            .then(res => res.json())
-            .then(data => setData(data))
-    }
-
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSuccess(null)
-        }, 3000)
-    }
-    // @todo wyeksportuj funckje closeNotification do osobnego pliku
     const addData = async () => {
         try {
             await fetch('http://localhost:3001/category/add', {
@@ -55,13 +44,13 @@ export const Category = () => {
         if (formData.name.length >= 50 || formData.name.length === 0) {
             setMess('Pole nazwy nie moze być puste lub nie moze przekroczyć 50 znaków')
             setSuccess(false);
-            closeNotification();
+            closeNotification(setSuccess);
             return
         }
         if (formData.image.length >= 200 || formData.image.length === 0) {
             setMess('Link do obrazka nie moze być pusty lub dluzszy niz 200 znaków!')
             setSuccess(false)
-            closeNotification()
+            closeNotification(setSuccess)
             return
         } else {
             addData();
@@ -70,7 +59,7 @@ export const Category = () => {
             const newData = [...data, formData];
             // @ts-ignore
             setData(newData);
-            closeNotification()
+            closeNotification(setSuccess)
             setFormData({
                 name: '',
                 image: ''
@@ -108,7 +97,7 @@ export const Category = () => {
             // @ts-ignore
             const newData = [...data].filter(item=> item.id !== delItem);
             setData(newData);
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }

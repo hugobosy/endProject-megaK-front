@@ -2,6 +2,7 @@ import React, {Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} fr
 import {v4 as uuid} from 'uuid';
 import {AdCategory, Product} from "types";
 import {Notification} from "../common/Notification/Notification";
+import {closeNotification, getItems} from "../../helpers/functions";
 
 interface Props {
     close: Dispatch<SetStateAction<boolean>>
@@ -25,20 +26,8 @@ export const AddProduct = (props: Props) => {
     const [succ, setSucc] = useState<boolean | null>(null)
     const [msg, setMsg] = useState<string>('')
 
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSucc(null)
-        }, 3000)
-    }
-
-    const getCategory = async () => {
-        const res = await fetch('http://localhost:3001/category');
-        const data = await res.json()
-        setCategory(await data);
-    }
-
     useEffect(() => {
-        getCategory();
+        getItems('http://localhost:3001/category', setCategory);
     }, [])
 
     const addProduct = async () => {
@@ -57,7 +46,7 @@ export const AddProduct = (props: Props) => {
         addProduct();
         setSucc(true);
         setMsg(`Dodano produkt ${data.firm} ${data.model} do bazy`)
-        closeNotification()
+        closeNotification(setSucc)
         setAccept(true)
         setData({
             id: '',

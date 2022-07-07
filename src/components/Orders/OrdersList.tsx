@@ -1,5 +1,5 @@
-import React, {SyntheticEvent, useState} from 'react';
-import {Order, Product} from "types";
+import React, {useState} from 'react';
+import {Order} from "types";
 
 interface Props {
     orders: Order[],
@@ -34,8 +34,6 @@ export const OrdersList = (props: Props) => {
             }))
         }
     }
-
-    console.log(sortList)
 
     return (
         <>

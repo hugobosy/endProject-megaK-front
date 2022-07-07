@@ -7,8 +7,7 @@ import {Notification} from "../../components/common/Notification/Notification";
 import {AddProduct} from "../../components/Products/AddProduct";
 import {EditProduct} from "../../components/Products/EditProduct";
 import {OrderNow} from "../../components/Products/OrderNow";
-
-
+import {getItems, closeNotification} from "../../helpers/functions";
 
 export const Products = () => {
 
@@ -24,22 +23,9 @@ export const Products = () => {
     })
     const [search, setSearch] = useState<Product[]>([])
 
-
-    const getProducts = async () => {
-        const res = await fetch('http://localhost:3001/products');
-        const data = await res.json();
-        setProduct(await data)
-    }
-
     useEffect(() => {
-        getProducts()
+        getItems('http://localhost:3001/products', setProduct)
     }, [])
-
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSuccess(null)
-        }, 3000)
-    }
 
     const handleClickButtonAddProduct = () => {
         setAddActive(true)
@@ -63,19 +49,18 @@ export const Products = () => {
         const delItem = e.currentTarget.id;
         //@ts-ignore
         const nameDelItem = e.currentTarget.dataset.name
-        if(window.confirm(`Czy jesteś pewien, ze chcesz usunąć ${nameDelItem}`)) {
+        if (window.confirm(`Czy jesteś pewien, ze chcesz usunąć ${nameDelItem}`)) {
             deleteProduct(delItem)
             setMess(`Usunięto produkt ${nameDelItem} z bazy`)
             setSuccess(false)
             const newData = [...product].filter(item => item.id !== delItem);
             setProduct(newData);
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }
 
     }
-    // todo przy błedach usuwania itp postaraj się wyświetlać belkę z informacją
 
     const handleEdit = (e: SyntheticEvent) => {
         setEditActive(true)

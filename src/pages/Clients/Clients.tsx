@@ -5,6 +5,7 @@ import {ClientListHeader} from "../../components/Clients/ClientListHeader";
 import {Notification} from "../../components/common/Notification/Notification";
 import {AddClient} from "../../components/Clients/AddClient";
 import {ClientType} from "types";
+import {closeNotification, getItems} from "../../helpers/functions";
 
 export const Clients = () => {
 
@@ -22,20 +23,8 @@ export const Clients = () => {
     })
 
     useEffect(() => {
-        getClients();
+        getItems('http://localhost:3001/clients', setClients);
     }, []);
-
-    const closeNotification = () => {
-        setTimeout(() => {
-            setSuccess(null)
-        }, 3000)
-    }
-
-    async function getClients(): Promise<void> {
-        const res = await fetch('http://localhost:3001/clients')
-        const data: ClientType[] = await res.json();
-        setClients(data)
-    }
 
     const handleSearch = (e: string) => {
         setSearch([...clients].filter(client => client.name.includes(e) || client.surname.includes(e) || client.email.includes(e)).map(order => order))
@@ -82,7 +71,7 @@ export const Clients = () => {
             // @ts-ignore
             const newList = clients.filter(client => client.id !== delItem)
             setClients(newList)
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }
@@ -101,7 +90,7 @@ export const Clients = () => {
             banClient(banItem)
             // @ts-ignore
             e.currentTarget.parentNode.parentNode.classList.add('banned')
-            closeNotification()
+            closeNotification(setSuccess)
         } else {
             return
         }
