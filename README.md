@@ -9,11 +9,11 @@
 3. [Uruchomienie programu](#uruchomienie-programu)
 4. [Wykorzystane technologie](#wykorzystane-technologie--paczki--jezyki-programowania)
 5. [Opis działania programu](#opis-dzialania-programu)
-    - [Dashboard](##Dashboard)
-    - [Produkty](##Produkty)
-    - [Zamówienia](##Zamówienia)
-    - [Kategorie](##Kategorie)
-    - [Klienci](##Klienci)
+    - [Dashboard](#Dashboard)
+    - [Produkty](#Produkty)
+    - [Zamówienia](#Zamówienia)
+    - [Kategorie](#Kategorie)
+    - [Klienci](#Klienci)
 
 # Wstęp
 
